@@ -18,9 +18,18 @@
 html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);overflow-x:hidden}
 
-/* PROGRESS BAR SCORRIMENTO — verticale destra */
-.scroll-progress{position:fixed;top:0;right:0;bottom:0;width:5px;z-index:300;background:rgba(168,216,234,.25)}
-.scroll-progress-fill{width:100%;height:0%;background:linear-gradient(180deg,var(--verde-scuro),var(--blu-chiaro));transition:height .1s linear;border-radius:0 0 3px 3px}
+/* SOMMARIO SEZIONI LATERALE */
+.side-nav{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:0;pointer-events:none}
+.side-nav-item{display:flex;align-items:center;gap:0;cursor:pointer;pointer-events:all;padding:5px 0;overflow:hidden}
+.side-nav-label{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--blu);background:rgba(250,246,238,.95);padding:5px 12px 5px 14px;border-radius:20px 0 0 20px;white-space:nowrap;max-width:0;overflow:hidden;opacity:0;transition:max-width .35s ease,opacity .3s ease,background .2s;box-shadow:-2px 0 12px rgba(42,111,168,.12)}
+.side-nav-dot{width:5px;height:28px;background:rgba(168,216,234,.4);flex-shrink:0;transition:all .3s;border-radius:3px 0 0 3px}
+.side-nav-item:hover .side-nav-label,
+.side-nav-item.active .side-nav-label{max-width:180px;opacity:1}
+.side-nav-item.active .side-nav-dot{background:var(--blu);height:36px}
+.side-nav-item:hover .side-nav-dot{background:var(--blu-chiaro)}
+.side-nav-item.active .side-nav-label{background:var(--blu);color:white}
+
+@media(max-width:600px){.side-nav{display:none}}
 
 /* Nascondi nav e drawer */
 nav{display:none}
@@ -268,8 +277,30 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 </head>
 <body>
 
-<!-- BARRA SCORRIMENTO -->
-<div class="scroll-progress"><div class="scroll-progress-fill" id="scrollFill"></div></div>
+<!-- SOMMARIO SEZIONI LATERALE -->
+<nav class="side-nav" id="sideNav">
+  <div class="side-nav-item" data-target="esperienze" onclick="scrollTo('#esperienze')">
+    <span class="side-nav-label">Esperienze</span><span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="visitare" onclick="scrollTo('#visitare')">
+    <span class="side-nav-label">Cosa Visitare</span><span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="cultura" onclick="scrollTo('#cultura')">
+    <span class="side-nav-label">Cultura</span><span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="natura" onclick="scrollTo('#natura')">
+    <span class="side-nav-label">Natura</span><span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="storia" onclick="scrollTo('#storia')">
+    <span class="side-nav-label">Storia</span><span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sacri" onclick="scrollTo('#sacri')">
+    <span class="side-nav-label">Luoghi Sacri</span><span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="muoversi" onclick="scrollTo('#muoversi')">
+    <span class="side-nav-label">Come Muoversi</span><span class="side-nav-dot"></span>
+  </div>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
@@ -935,16 +966,32 @@ const counterObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObs.observe(el));
 
-// Back to top + scroll progress
+// Back to top
 const backTop = document.getElementById('backTop');
-const scrollFill = document.getElementById('scrollFill');
 window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
-  scrollFill.style.height = pct + '%';
-  backTop.classList.toggle('show', scrolled > 400);
+  backTop.classList.toggle('show', window.scrollY > 400);
+  updateSideNav();
 });
+
+// Side nav — evidenzia sezione attiva
+const sideItems = document.querySelectorAll('.side-nav-item');
+function updateSideNav() {
+  const sections = ['esperienze','visitare','cultura','natura','storia','sacri','muoversi'];
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (window.scrollY >= el.offsetTop - window.innerHeight / 2) current = id;
+  });
+  sideItems.forEach(item => {
+    item.classList.toggle('active', item.dataset.target === current);
+  });
+}
+function scrollTo(selector) {
+  const el = document.querySelector(selector);
+  if (el) el.scrollIntoView({behavior:'smooth'});
+}
+updateSideNav();
 
 // Hamburger drawer
 function toggleDrawer() {
