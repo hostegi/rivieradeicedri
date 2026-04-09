@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bellezze Intorno a Noi — Hotel delle Stelle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@300;400;600;700;800;900&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* Blocca rendering finché i font sono pronti */
+.hero h1,.section-title,.big-quote,.footer-brand h3{font-display:swap}
 :root {
   --blu:#2a6fa8; --blu-chiaro:#5bb3d8;
   --celeste:#a8d8ea; --celeste-pale:#d6eef8;
@@ -17,6 +21,8 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);overflow-x:hidden}
+/* Fallback font vicino a Caveat per ridurre il flash */
+.hero h1,.section-title,.big-quote,.footer-brand h3{font-family:'Caveat',cursive,'Comic Sans MS',cursive}
 
 /* SOMMARIO SEZIONI LATERALE */
 .side-nav{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;align-items:flex-start;gap:0;pointer-events:none}
@@ -29,7 +35,12 @@ body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);
 .side-nav-item:hover .side-nav-dot{background:var(--blu-chiaro)}
 .side-nav-item.active .side-nav-label{background:var(--blu);color:white}
 
-@media(max-width:600px){.side-nav{display:none}}
+@media(max-width:600px){
+  .side-nav{display:flex}
+  .side-nav-dot{width:4px;height:22px}
+  .side-nav-item.active .side-nav-dot{height:30px}
+  .side-nav-label{display:none}
+}
 
 /* Nascondi nav e drawer */
 nav{display:none}
@@ -182,8 +193,15 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
 .reveal{opacity:0;transform:translateY(36px);transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* STATS BAR — rimossa */
-.stats-bar{display:none}
+.social-bar{display:flex;justify-content:center;gap:10px;padding:24px 20px 10px;flex-wrap:wrap}
+.social-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:24px;font-size:11.5px;font-weight:800;text-decoration:none;letter-spacing:.4px;transition:all .25s}
+.social-btn-fb{background:#1877f2;color:white}
+.social-btn-fb:hover{background:#0d65d9;transform:translateY(-2px);box-shadow:0 6px 18px rgba(24,119,242,.4)}
+.social-btn-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white}
+.social-btn-ig:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 6px 18px rgba(253,29,29,.35)}
+.social-btn-web{background:rgba(255,255,255,.12);color:white;border:1.5px solid rgba(255,255,255,.3)}
+.social-btn-web:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.social-btn svg{flex-shrink:0}
 
 /* FLOATING SCROLL INDICATOR */
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
@@ -909,6 +927,21 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
       <p><strong>Reception Hotel delle Stelle</strong></p>
       <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.3);">Contenuti a cura di Hotel delle Stelle Beach Resort</p>
     </div>
+  </div>
+  <!-- SOCIAL -->
+  <div class="social-bar">
+    <a class="social-btn social-btn-fb" href="https://www.facebook.com/share/1JHcNNRktM/?mibextid=wwXIfr" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <a class="social-btn social-btn-ig" href="https://www.instagram.com/hoteldellestelle?igsh=MWY0MDFpY3ZobTlwdA==" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+    <a class="social-btn social-btn-web" href="https://www.hoteldellestelle.it" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Sito Web
+    </a>
   </div>
   <div class="footer-cs">
     Alcuni contenuti di approfondimento sono tratti da
