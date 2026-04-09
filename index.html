@@ -18,9 +18,9 @@
 html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);overflow-x:hidden}
 
-/* PROGRESS BAR SCORRIMENTO */
-.scroll-progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:rgba(168,216,234,.3)}
-.scroll-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--verde-scuro),var(--blu-chiaro));transition:width .1s linear;border-radius:0 2px 2px 0}
+/* PROGRESS BAR SCORRIMENTO — verticale destra */
+.scroll-progress{position:fixed;top:0;right:0;bottom:0;width:5px;z-index:300;background:rgba(168,216,234,.25)}
+.scroll-progress-fill{width:100%;height:0%;background:linear-gradient(180deg,var(--verde-scuro),var(--blu-chiaro));transition:height .1s linear;border-radius:0 0 3px 3px}
 
 /* Nascondi nav e drawer */
 nav{display:none}
@@ -942,7 +942,7 @@ window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
   const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
-  scrollFill.style.width = pct + '%';
+  scrollFill.style.height = pct + '%';
   backTop.classList.toggle('show', scrolled > 400);
 });
 
