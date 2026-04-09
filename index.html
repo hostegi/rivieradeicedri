@@ -19,13 +19,30 @@ html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(250,246,238,.96);backdrop-filter:blur(14px);border-bottom:2px solid var(--celeste);display:flex;align-items:center;justify-content:space-between;padding:8px 36px;box-shadow:0 2px 24px var(--shadow)}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-logo img{height:48px;width:auto;border-radius:50%;object-fit:cover}
-.hotel-name{font-weight:900;font-size:12px;color:var(--blu);line-height:1.3;text-transform:uppercase;letter-spacing:1px}
-.nav-links{display:flex;gap:3px;flex-wrap:wrap}
-.nav-links a{text-decoration:none;font-size:10.5px;font-weight:800;color:var(--blu);padding:5px 11px;border-radius:20px;border:1.5px solid transparent;transition:all .22s;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-.nav-links a:hover{background:var(--celeste-pale);border-color:var(--blu-chiaro)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(250,246,238,.97);backdrop-filter:blur(14px);border-bottom:2px solid var(--celeste);display:flex;align-items:center;justify-content:space-between;padding:8px 22px;box-shadow:0 2px 24px var(--shadow)}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.nav-logo-img{height:80px;width:auto;border-radius:0;object-fit:contain;flex-shrink:0}
+.hotel-name{font-weight:900;font-size:13px;color:var(--blu);line-height:1.35;text-transform:uppercase;letter-spacing:.8px}
+.hotel-name small{display:block;font-size:10px;font-weight:600;color:var(--blu-chiaro);text-transform:none;letter-spacing:.3px}
+
+/* HAMBURGER */
+.hamburger{background:none;border:2px solid var(--celeste);border-radius:10px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:5px;transition:all .2s}
+.hamburger:hover{background:var(--celeste-pale)}
+.hamburger span{display:block;width:22px;height:2.5px;background:var(--blu);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* MOBILE DRAWER */
+.nav-drawer{position:fixed;top:0;right:0;bottom:0;width:min(280px,80vw);background:rgba(250,246,238,.98);backdrop-filter:blur(20px);z-index:199;box-shadow:-4px 0 32px rgba(42,111,168,.18);transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);padding-top:100px;display:flex;flex-direction:column}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer a{text-decoration:none;font-size:15px;font-weight:800;color:var(--blu);padding:16px 28px;border-bottom:1px solid var(--celeste-pale);text-transform:uppercase;letter-spacing:.8px;transition:background .2s}
+.nav-drawer a:hover{background:var(--celeste-pale)}
+.nav-overlay{position:fixed;inset:0;z-index:198;background:rgba(26,58,92,.35);opacity:0;pointer-events:none;transition:opacity .3s}
+.nav-overlay.show{opacity:1;pointer-events:all}
+
+/* Nascondi vecchi nav-links desktop */
+.nav-links{display:none}
 
 /* HERO */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
@@ -40,8 +57,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(250,246,238,
 .hero-badges{display:flex;gap:10px;flex-wrap:wrap}
 .badge{background:white;border:2px solid var(--celeste);border-radius:30px;padding:7px 16px;font-size:12.5px;font-weight:800;color:var(--blu);box-shadow:0 3px 12px var(--shadow)}
 
+/* CALABRIA STRAORDINARIA BANNER */
+.cs-banner{background:linear-gradient(90deg,#1a3a5c,#2a6fa8);padding:18px 40px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.cs-banner img{height:36px;filter:brightness(0) invert(1);opacity:.9}
+.cs-banner-text{color:white;font-size:13px;font-weight:700;letter-spacing:.5px}
+.cs-banner a{color:var(--celeste);font-weight:800;text-decoration:none;border-bottom:1px solid var(--celeste);transition:opacity .2s}
+.cs-banner a:hover{opacity:.7}
+
 /* STRIP */
-.strip{background:linear-gradient(90deg,var(--verde-scuro),#4caf50);color:white;padding:15px 40px;text-align:center;font-size:13.5px;font-weight:700;letter-spacing:.8px}
+.strip{background:linear-gradient(90deg,var(--verde-scuro),#4caf50);color:white;padding:14px 30px;text-align:center}
+.strip-keywords{font-size:14px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.strip-sub{font-size:12.5px;font-weight:600;letter-spacing:.4px;opacity:.92;white-space:nowrap}
+@media(max-width:600px){.strip-sub{white-space:normal;font-size:12px}}
 
 /* SECTION */
 section{padding:76px 60px;position:relative}
@@ -51,7 +78,7 @@ section{padding:76px 60px;position:relative}
 
 /* VISITARE */
 #visitare{background:white}
-.visitare-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:44px;align-items:start}
+.visitare-layout{display:grid;grid-template-columns:1fr;gap:30px;align-items:start}
 .towns-label{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .towns-label.costa{color:var(--blu)}
 .towns-label.montagna{color:var(--verde-scuro);margin-top:22px}
@@ -60,9 +87,10 @@ section{padding:76px 60px;position:relative}
 .town-pill:hover{background:var(--blu);color:white;border-color:var(--blu);transform:translateY(-2px)}
 .town-pill.mont{background:#e8f5e9;border-color:#a5d6a7;color:var(--verde-scuro)}
 .town-pill.mont:hover{background:var(--verde-scuro);color:white;border-color:var(--verde-scuro)}
-.mappa-box{border-radius:20px;overflow:hidden;box-shadow:0 8px 32px var(--shadow);position:sticky;top:80px}
-.mappa-box iframe{width:100%;height:480px;border:none;display:block}
-.mappa-caption{background:var(--celeste-pale);padding:12px 16px;font-size:12px;font-weight:700;color:var(--blu);text-align:center}
+.maps-btn-wrap{margin-top:28px}
+.maps-btn{display:inline-flex;align-items:center;gap:10px;background:var(--blu);color:white;text-decoration:none;padding:13px 26px;border-radius:30px;font-size:13px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;box-shadow:0 4px 18px var(--shadow);transition:all .25s}
+.maps-btn:hover{background:var(--blu-chiaro);transform:translateY(-2px);box-shadow:0 8px 28px var(--shadow)}
+.maps-btn svg{flex-shrink:0}
 
 /* QUOTE */
 .big-quote{font-family:'Caveat',cursive;font-size:clamp(26px,4vw,50px);color:var(--blu);text-align:center;padding:60px 60px 50px;background:white;line-height:1.25}
@@ -88,15 +116,27 @@ section{padding:76px 60px;position:relative}
 .location-note{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font-size:11px;font-weight:800;color:var(--blu-chiaro);text-decoration:none;letter-spacing:.5px;border-bottom:1px dashed var(--celeste);padding-bottom:1px;transition:color .2s}
 .location-note:hover{color:var(--blu)}
 
+/* CREDITS NOTE */
+.credits-note{font-size:10.5px;color:#888;font-style:italic;margin-top:10px;display:block}
+.credits-note a{color:var(--blu-chiaro);text-decoration:none}
+.credits-note a:hover{text-decoration:underline}
+
+/* CONTACT PILL */
+.contact-pill{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:800;color:var(--verde-scuro);text-decoration:none;transition:all .2s}
+.contact-pill:hover{background:var(--verde-scuro);color:white}
+.contact-pill + .contact-pill{margin-left:6px}
+
 /* EXPAND */
 .expand-btn{display:block;width:100%;background:var(--celeste-pale);border:none;padding:10px 20px;text-align:center;font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu);cursor:pointer;transition:background .2s;font-family:'Nunito',sans-serif}
 .expand-btn:hover{background:var(--celeste)}
 .expand-panel{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s;background:#f0f7fc;padding:0 20px}
-.expand-panel.open{max-height:600px;padding:18px 20px 20px}
+.expand-panel.open{max-height:700px;padding:18px 20px 20px}
 .expand-panel p{font-size:13px;line-height:1.7;color:#2a4a6a;margin-bottom:12px}
 .ext-link{display:inline-block;background:var(--blu);color:white;padding:7px 18px;border-radius:20px;font-size:11px;font-weight:800;text-decoration:none;letter-spacing:.8px;text-transform:uppercase;transition:background .2s;margin-right:8px;margin-bottom:6px}
 .ext-link:hover{background:var(--blu-chiaro)}
 .ext-link.verde{background:var(--verde-scuro)}.ext-link.verde:hover{background:var(--verde)}
+.ext-link.cs{background:#e67e22;}.ext-link.cs:hover{background:#d35400}
+.ext-link.ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}.ext-link.ig:hover{opacity:.85}
 
 /* BG VARIANTS */
 .bg-white{background:white}
@@ -126,11 +166,6 @@ section{padding:76px 60px;position:relative}
 .util-link{display:block;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:10px;padding:10px 14px;color:white;text-decoration:none;font-size:12.5px;font-weight:700;transition:background .2s;margin-bottom:8px}
 .util-link:hover{background:rgba(255,255,255,.22)}
 
-/* MAPPA COMPLETA */
-#mappa-riviera{background:white}
-.mappa-full{border-radius:20px;overflow:hidden;box-shadow:0 8px 32px var(--shadow)}
-.mappa-full iframe{width:100%;height:560px;border:none;display:block}
-
 /* WAVE */
 .wave{display:block;overflow:hidden;line-height:0}
 .wave svg{display:block;width:100%}
@@ -143,49 +178,141 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
 .footer-contact{text-align:right}
 .footer-contact p{font-size:12.5px;color:rgba(255,255,255,.7);margin-bottom:3px}
 .footer-contact strong{color:var(--verde)}
+.footer-cs{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);width:100%;text-align:center;font-size:11px;color:rgba(255,255,255,.4)}
+.footer-cs a{color:rgba(255,255,255,.6);text-decoration:none}
+.footer-cs a:hover{color:white}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(36px);transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{padding:8px 18px}
-  .nav-links{display:none}
-  section{padding:54px 22px}
-  .hero-content{padding:110px 24px 70px}
-  .visitare-layout{grid-template-columns:1fr}
-  .transport-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;text-align:center}
+/* STATS BAR — rimossa */
+.stats-bar{display:none}
+
+/* FLOATING SCROLL INDICATOR */
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(42,111,168,.7);animation:bounce 2s ease infinite}
+.scroll-hint span{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+
+/* CARD HOVER GLOW */
+.act-card{position:relative}
+.act-card::after{content:'';position:absolute;inset:0;border-radius:22px;background:radial-gradient(circle at 50% 0%,rgba(91,179,216,.18),transparent 70%);opacity:0;transition:opacity .35s;pointer-events:none}
+.act-card:hover::after{opacity:1}
+
+/* PULSE on new badge */
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(106,191,105,.4)}70%{box-shadow:0 0 0 10px rgba(106,191,105,0)}100%{box-shadow:0 0 0 0 rgba(106,191,105,0)}}
+.badge-new{animation:pulse-ring 2s ease infinite}
+
+/* BACK TO TOP */
+.back-top{position:fixed;bottom:22px;right:18px;z-index:300;background:var(--blu);color:white;border:none;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px var(--shadow);transition:all .25s;opacity:0;transform:translateY(14px)}
+.back-top.show{opacity:1;transform:translateY(0)}
+.back-top:hover{background:var(--blu-chiaro)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.footer-top{display:flex;align-items:center;justify-content:space-between;gap:28px;width:100%;flex-wrap:wrap}
+.footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.footer-logo-img{height:110px;width:auto;object-fit:contain;display:block;margin-bottom:12px}
+.footer-brand h3{font-family:'Caveat',cursive;font-size:38px;color:var(--celeste);margin-bottom:2px;line-height:1}
+.footer-brand p{font-size:12.5px;color:rgba(255,255,255,.55)}
+.footer-tagline{font-size:14px;font-weight:300;font-style:italic;color:rgba(255,255,255,.7);max-width:260px;text-align:center;line-height:1.6}
+.footer-contact{text-align:right}
+.footer-contact p{font-size:12.5px;color:rgba(255,255,255,.7);margin-bottom:3px}
+.footer-contact strong{color:var(--verde)}
+.footer-cs{padding-top:18px;border-top:1px solid rgba(255,255,255,.12);width:100%;text-align:center;font-size:11px;color:rgba(255,255,255,.35);line-height:1.7}
+.footer-cs a{color:rgba(255,255,255,.55);text-decoration:none}
+.footer-cs a:hover{color:white}
+
+/* ===== MOBILE FIRST — tutto sotto 768px ===== */
+@media(max-width:768px){
+  /* nav */
+  nav{padding:6px 16px}
+  .nav-logo-img{height:64px;width:auto}
+  .hotel-name{font-size:11.5px}
+
+  /* hero */
+  .hero-content{padding:100px 20px 70px;max-width:100%}
+  .hero h1{font-size:clamp(52px,14vw,80px)}
+  .hero p{font-size:15px}
+  .hero-badges{gap:8px}
+  .badge{font-size:11.5px;padding:6px 13px}
+
+  /* highlights */
+  .highlights-strip{grid-template-columns:repeat(2,1fr)}
+  .hl-item{padding:14px 12px;border-right:none;border-bottom:1px solid var(--celeste-pale)}
+  .hl-item:nth-child(odd){border-right:1px solid var(--celeste-pale)}
+  .hl-item:nth-last-child(-n+2):not(:nth-child(odd) ~ *){border-bottom:none}
+  .hl-item:last-child,.hl-item:nth-last-child(2){border-bottom:none}
+
+  /* sections */
+  section{padding:44px 18px}
+  .section-title{font-size:clamp(34px,9vw,52px)}
+
+  /* cards — una per riga su mobile */
+  .cards-grid{grid-template-columns:1fr;gap:18px}
+
+  /* strip */
+  .strip{padding:12px 16px}
+  .strip-keywords{font-size:13px;letter-spacing:1px}
+  .strip-sub{font-size:11.5px}
+
+  /* transport */
+  .transport-grid{grid-template-columns:1fr;gap:18px}
+
+  /* quote */
+  .big-quote{padding:40px 20px 32px;font-size:clamp(22px,6vw,36px)}
+
+  /* footer */
+  footer{padding:36px 20px 24px}
+  .footer-top{flex-direction:column;align-items:center;text-align:center}
+  .footer-brand{align-items:center}
+  .footer-logo-img{height:100px}
   .footer-contact{text-align:center}
+  .back-top{width:46px;height:46px;bottom:16px;right:14px}
+}
+
+@media(max-width:480px){
+  .nav-logo-img{height:60px}
+  .hotel-name small{display:none}
+  .cards-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV OVERLAY -->
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#visitare" onclick="closeDrawer()">Cosa Visitare</a>
+  <a href="#esperienze" onclick="closeDrawer()">Esperienze</a>
+  <a href="#cultura" onclick="closeDrawer()">Cultura</a>
+  <a href="#natura" onclick="closeDrawer()">Natura</a>
+  <a href="#storia" onclick="closeDrawer()">Storia</a>
+  <a href="#sacri" onclick="closeDrawer()">Luoghi Sacri</a>
+  <a href="#muoversi" onclick="closeDrawer()">Come Muoversi</a>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/logohotel.jpeg" alt="Hotel delle Stelle">
-    <div class="hotel-name">Hotel delle Stelle<br>Beach Resort</div>
+    <img class="nav-logo-img"
+         src="https://raw.githubusercontent.com/hostegi/imgriviera/main/logohotel.jpeg"
+         alt="Hotel delle Stelle"
+         onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hostegi/imgriviera/main/logovettoriale.svg'">
+    <div class="hotel-name">Hotel delle Stelle<small>Beach Resort · Riviera dei Cedri</small></div>
   </div>
-  <div class="nav-links">
-    <a href="#visitare">Cosa Visitare</a>
-    <a href="#esperienze">Esperienze</a>
-    <a href="#cultura">Cultura</a>
-    <a href="#natura">Natura</a>
-    <a href="#storia">Storia</a>
-    <a href="#sacri">Luoghi Sacri</a>
-    <a href="#mappa-riviera">Mappa</a>
-    <a href="#muoversi">Come Muoversi</a>
-  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg">
-    <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/rivieradeicedri.jpeg" alt="Riviera dei Cedri">
+    <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/cascatavuglio.jpeg" alt="Cascata del Vuglio — Riviera dei Cedri">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -200,9 +327,19 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       <div class="badge">Esperienze uniche</div>
     </div>
   </div>
+  <div class="scroll-hint">
+    <span>Scopri</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
 </div>
 
-<div class="strip">Visite · Escursioni · Esperienze · Mobilita — Scopri tutto quello che puoi fare durante il tuo soggiorno</div>
+
+<div class="strip">
+  <div class="strip-keywords">Visite · Escursioni · Esperienze · Mobilità</div>
+  <div class="strip-sub">Scopri tutto quello che puoi fare durante il tuo soggiorno</div>
+</div>
+
+
 
 <!-- COSA VISITARE -->
 <section id="visitare" class="bg-white">
@@ -211,7 +348,7 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
   <p class="section-sub">Un intreccio di paesi affacciati sul mare e piccoli borghi tra colline e montagne. Un territorio ricco di colori, sapori e storie da scoprire.</p>
   <div class="visitare-layout">
     <div class="towns-block reveal">
-      <div class="towns-label costa">Costa — 15 localita balneari</div>
+      <div class="towns-label costa">Costa — 15 località balneari</div>
       <div class="coast-grid">
         <span class="town-pill">Tortora</span><span class="town-pill">Praia a Mare</span>
         <span class="town-pill">San Nicola Arcella</span><span class="town-pill">Scalea</span>
@@ -226,18 +363,20 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       <div class="coast-grid">
         <span class="town-pill mont">Aieta</span><span class="town-pill mont">Santa Domenica Talao</span>
         <span class="town-pill mont">Papasidero</span><span class="town-pill mont">Orsomarso</span>
-        <span class="town-pill mont">Verbicaro</span><span class="town-pill mont">Maiera</span>
+        <span class="town-pill mont">Verbicaro</span><span class="town-pill mont">Maierà</span>
         <span class="town-pill mont">Buonvicino</span>
       </div>
-    </div>
-    <div class="mappa-box reveal">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d98000!2d15.85!3d39.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sit!2sit!4v1712600000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <div class="mappa-caption">Riviera dei Cedri — Da Tortora a Paola</div>
+      <div class="maps-btn-wrap reveal">
+        <a class="maps-btn" href="https://www.google.com/maps/search/Riviera+dei+Cedri+Calabria" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Esplora la Riviera su Google Maps
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="big-quote">"Tra il <span>blu del mare</span> e il <span>verde delle montagne</span>,<br>ogni giorno qui e un'esperienza nuova."</div>
+<div class="big-quote">"Tra il <span>blu del mare</span> e il <span>verde delle montagne</span>,<br>ogni giorno qui è un'esperienza nuova."</div>
 
 <!-- ESPERIENZE -->
 <section id="esperienze" class="bg-crema">
@@ -246,6 +385,7 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
   <p class="section-sub">Dal cielo alle acque del Lao, la Riviera dei Cedri offre emozioni per tutti i gusti.</p>
   <div class="cards-grid">
 
+    <!-- PARAPENDIO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/parapendio.jpeg" alt="Parapendio">
@@ -253,19 +393,28 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Parapendio</h3>
-        <p>Un'esperienza mozzafiato: si decolla da <strong>600 metri di quota</strong> per un volo panoramico di 15-20 minuti, sorvolando paesaggi spettacolari tra mare e montagne. Istruttori abilitati inclusi.</p>
-        <a class="location-note" href="https://www.google.com/maps/search/parapendio+Diamante+Calabria" target="_blank" onclick="event.stopPropagation()">
+        <p>Un'esperienza mozzafiato: si decolla da <strong>600 metri di quota</strong> per un volo panoramico di 15–20 minuti, sorvolando paesaggi spettacolari tra mare e montagne. Istruttori abilitati inclusi.</p>
+        <a class="location-note" href="https://www.google.com/maps/search/parapendio+Praia+a+Mare+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Diamante, Calabria — Vedi su Maps
+          Praia a Mare (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il parapendio biposto permette di volare anche senza esperienza pregressa. Si decolla dai monti della Catena Costiera e si atterra sulla spiaggia, con vista unica sull'Isola di Dino. Attivita didattica riconosciuta, sicura, adatta a tutte le eta.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/search/parapendio+Diamante+Calabria" target="_blank">Vedi su Google Maps</a>
+        <p>Il volo in biposto (tandem) con istruttore è il modo più semplice per volare, senza esperienza pregressa. Si parte da Praia a Mare con il pulmino 4x4 della scuola fino alla zona di decollo, per poi atterrare dolcemente in spiaggia. Vista unica sull'Isola di Dino. Voli disponibili tutti i giorni 10:00–18:00 (estate) e 11:00–15:00 (inverno).</p>
+        <p>Gestito dalla <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.</p>
+        <a class="contact-pill" href="tel:3336643336">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Prenota: 333 664 3336
+        </a>
+        <br><br>
+        <a class="ext-link verde" href="https://www.flytirreno.com" target="_blank">FlyTirreno.com</a>
+        <a class="ext-link" href="https://www.tripadvisor.it/Attraction_Review-g194866-d4889927-Reviews-Parapendio_Praia_a_Mare-Praia_A_Mare_Province_of_Cosenza_Calabria.html" target="_blank">Recensioni TripAdvisor</a>
+        <a class="ext-link" href="https://www.google.com/maps/search/parapendio+Praia+a+Mare+Calabria" target="_blank">Google Maps</a>
       </div>
     </div>
 
+    <!-- RAFTING -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/rafting.jpeg" alt="Rafting Fiume Lao">
@@ -279,13 +428,17 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
           Papasidero (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il Lao scorre tra pareti rocciose alte anche 200 metri. I tratti sono diversificati per difficolta: ideali per famiglie, coppie e gruppi. Stagione migliore: aprile-settembre. I centri di rafting offrono attrezzatura completa e guide esperte del Parco Nazionale del Pollino.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/search/Fiume+Lao+Papasidero" target="_blank">Vedi su Google Maps</a>
+        <p>Il Lao scorre tra pareti rocciose alte anche 200 metri. I tratti sono diversificati per difficoltà: ideali per famiglie, coppie e gruppi. Stagione migliore: aprile–settembre. I centri di rafting offrono attrezzatura completa e guide esperte del Parco Nazionale del Pollino.</p>
+        <a class="ext-link verde" href="https://www.raftingcalabria.it" target="_blank">Rafting Calabria</a>
+        <a class="ext-link verde" href="https://laorafting.com" target="_blank">Lao Rafting</a>
+        <a class="ext-link verde" href="https://www.raftingsulfiumelao.it" target="_blank">Rafting sul Fiume Lao</a>
+        <a class="ext-link" href="https://www.google.com/maps/search/Fiume+Lao+Papasidero" target="_blank">Google Maps</a>
       </div>
     </div>
 
+    <!-- BARCA -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/noleggibarche.jpeg" alt="Escursioni in Barca">
@@ -293,36 +446,44 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Escursioni in Barca</h3>
-        <p>Tour tra grotte, calette e scogli spettacolari, con possibilita di <strong>aperitivi al tramonto</strong> e uscite esclusive sull'Isola di Dino e nelle insenature della costa.</p>
+        <p>Tour tra grotte, calette e scogli spettacolari, con possibilità di <strong>aperitivi al tramonto</strong> e uscite esclusive sull'Isola di Dino e nelle insenature della costa.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Isola+di+Dino+Praia+a+Mare" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Praia a Mare — Isola di Dino — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
         <p>Le escursioni partono dai porticcioli della Riviera. Si naviga tra le grotte marine dell'Arcomagno, i fondali di San Nicola Arcella e le calette di Praia a Mare. Disponibile anche noleggio senza skipper per chi ha patente nautica. Servizi di aperitivo al tramonto su prenotazione.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/search/porto+Praia+a+Mare" target="_blank">Vedi su Google Maps</a>
+        <a class="ext-link verde" href="https://www.calabria-tour.it/escursioni-in-barca-calabria/escursioni-in-barca-riviera-dei-cedri/" target="_blank">Calabria Tour</a>
+        <a class="ext-link cs" href="https://calabriastraordinaria.it/esperienze/tour-in-barca-lungo-la-riviera-dei-cedri" target="_blank">Calabria Straordinaria</a>
+        <a class="ext-link verde" href="https://adhoctravel.it/escursione-alla-scoperta-della-riviera-dei-cedri-con-ad-hoc-travel-experience" target="_blank">Ad Hoc Travel</a>
+        <a class="ext-link" href="https://www.google.com/maps/search/porto+Praia+a+Mare" target="_blank">Google Maps</a>
       </div>
     </div>
 
+    <!-- RAPACI -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
-        <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/falchi.jpeg" alt="Esperienza con i Rapaci">
+        <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/falco.jpg" alt="Esperienza con i Rapaci">
         <span class="act-tag tag-natura">Natura</span>
       </div>
       <div class="act-card-body">
         <h3>Esperienza con i Rapaci</h3>
-        <p>Un'esperienza autentica con rapaci, tra <strong>voli liberi</strong> e passeggiate nel bosco. Momenti di didattica, natura e fotografia in location suggestive della Catena Costiera.</p>
-        <a class="location-note" href="https://www.google.com/maps/search/falconeria+Belvedere+Marittimo+Calabria" target="_blank" onclick="event.stopPropagation()">
+        <p>Un'esperienza autentica con rapaci, tra <strong>voli liberi</strong> e passeggiate nel bosco. Momenti di didattica, natura e fotografia in location suggestive della Catena Costiera. Durante la stagione estiva, su prenotazione, i pomeriggi con i rapaci vengono organizzati anche direttamente in hotel.</p>
+        <a class="location-note" href="https://www.google.com/maps/search/falconeria+Bonifati+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Belvedere Marittimo — Vedi su Maps
+          Bonifati (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Falchi, gufi e aquile presentati da falconieri esperti in ambienti naturali della Catena Costiera. L'attivita include voli dimostrativi, momenti fotografici ravvicinati e la possibilita di tenere un rapace sul guanto. Adatta a bambini e famiglie.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/search/rapaci+Calabria+Catena+Costiera" target="_blank">Vedi su Google Maps</a>
+        <p>Falchi e altri rapaci presentati da falconieri esperti in ambienti naturali della Catena Costiera. L'attività include voli dimostrativi, momenti fotografici ravvicinati e la possibilità di tenere un rapace sul guanto. Adatta a bambini e famiglie. Per le date degli eventi in hotel, contattate la nostra Reception.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/falco.jpeg" alt="Falco" style="width:90px;height:70px;object-fit:cover;border-radius:10px">
+          <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/falcol.jpeg" alt="Falconiere" style="width:90px;height:70px;object-fit:cover;border-radius:10px">
+        </div>
+        <a class="ext-link" href="https://www.google.com/maps/search/rapaci+Calabria+Catena+Costiera" target="_blank" style="margin-top:12px">Google Maps</a>
       </div>
     </div>
 
@@ -336,6 +497,7 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
   <p class="section-sub">Arte di strada, concerti all'aperto, mercati locali e musei unici al mondo.</p>
   <div class="cards-grid">
 
+    <!-- MURALES -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/muralesdiamante.jpeg" alt="Murales di Diamante">
@@ -343,20 +505,23 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Murales di Diamante</h3>
-        <p>Dal 1981 Diamante e un <strong>museo a cielo aperto</strong>: oltre 300 murales colorano le vie del centro storico, tra arte, poesia e tradizione. Ogni vicolo e una sorpresa.</p>
+        <p>Dal 1981 Diamante è un <strong>museo a cielo aperto</strong>: oltre 300 murales colorano le vie del centro storico, tra arte, poesia e tradizione. Ogni vicolo è una sorpresa.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Diamante+CS" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Diamante (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>I murales nascono nel 1981 con una mostra internazionale. Da allora Diamante e uno dei piu importanti esempi di street art in Italia. I temi spaziano dalla storia locale al surrealismo, dall'omaggio ai pescatori alla critica sociale. Una passeggiata nel centro storico e un percorso d'arte all'aria aperta imperdibile.</p>
+        <p>I murales nascono nel 1981 con una mostra internazionale. Da allora Diamante è uno dei più importanti esempi di street art in Italia. I temi spaziano dalla storia locale al surrealismo, dall'omaggio ai pescatori alla critica sociale. Una passeggiata nel centro storico è un percorso d'arte all'aria aperta imperdibile.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Diamante+CS" target="_blank">Google Maps</a>
-        <a class="ext-link verde" href="https://it.wikipedia.org/wiki/Diamante_(Calabria)" target="_blank">Approfondisci</a>
+        <a class="ext-link verde" href="https://enricatancioni.com/2022/09/05/in-giro-per-diamante-il-borgo-dei-murales/" target="_blank">Guida ai Murales</a>
+        <a class="ext-link verde" href="https://siviaggia.it/borghi/murales-diamante-arte-peperoncino/213906/" target="_blank">Si Viaggia</a>
+        <span class="credits-note">Contenuti di approfondimento da <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> e <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a></span>
       </div>
     </div>
 
+    <!-- CIRELLA -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/rudericirella.jpeg" alt="Ruderi di Cirella">
@@ -367,36 +532,38 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
         <p>Antico insediamento dal Paleolitico. Ogni estate un <strong>teatro a cielo aperto</strong> tra le mura di Cirella ospita artisti nazionali e internazionali — un'esperienza unica sotto le stelle.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Cirella+Vecchia,+Diamante" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Cirella Vecchia, Diamante — Vedi su Maps
+          Cirella Vecchia, Diamante (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Cirella e un'antica citta fantasma sulla collina sopra Diamante, con origini preistoriche. Attraverso incursioni saracene, Borboni e abbandoni, conserva ruderi del castello baronale e di antiche chiese. D'estate il festival di musica tra le rovine crea un'atmosfera senza eguali.</p>
+        <p>Cirella è un'antica città fantasma sulla collina sopra Diamante, con origini preistoriche. Attraverso incursioni saracene, Borboni e abbandoni, conserva ruderi del castello baronale e di antiche chiese. D'estate il festival di musica tra le rovine crea un'atmosfera senza eguali.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Cirella+Vecchia" target="_blank">Google Maps</a>
       </div>
     </div>
 
+    <!-- MERCATI -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
-        <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/mercatovenerdi.jpeg" alt="Mercato del Venerdi">
+        <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/mercatovenerdi.jpeg" alt="Mercati Tradizionali">
         <span class="act-tag tag-cultura">Tradizione</span>
       </div>
       <div class="act-card-body">
-        <h3>Mercato del Venerdi</h3>
-        <p>Ogni venerdi mattina, il caratteristico <strong>mercato settimanale</strong> anima la piazza con prodotti freschi, abbigliamento e oggetti locali — quotidianita autentica della Riviera.</p>
-        <a class="location-note" href="https://www.google.com/maps/search/mercato+Diamante+Calabria" target="_blank" onclick="event.stopPropagation()">
+        <h3>Mercati Tradizionali</h3>
+        <p>La Riviera è animata da <strong>mercati settimanali</strong> con prodotti freschi, abbigliamento e oggetti locali — quotidianità autentica da vivere.</p>
+        <a class="location-note" href="https://www.google.com/maps/search/mercato+Riviera+dei+Cedri+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Diamante (CS) — Vedi su Maps
+          Riviera dei Cedri — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il mercato del venerdi e un appuntamento fisso per residenti e turisti. Tra le bancarelle: frutta, verdura e pesce freschi, artigianato, spezie, abbigliamento. Un modo semplice e autentico per vivere la quotidianita della Riviera dei Cedri.</p>
-        <a class="ext-link" href="https://www.google.com/maps/place/Diamante+CS" target="_blank">Google Maps</a>
+        <p>Lungo la Riviera ci sono mercati settimanali in diversi paesi: tra questi <strong>Cittadella del Capo</strong> il giovedì mattina, <strong>Cetraro</strong> il sabato mattina, e mercati estivi in altri comuni. Tra le bancarelle: frutta, verdura e pesce freschi, artigianato, spezie, abbigliamento. Un modo semplice e autentico per vivere la quotidianità della Riviera.</p>
+        <a class="ext-link" href="https://www.google.com/maps/search/mercati+Calabria+costa" target="_blank">Google Maps</a>
       </div>
     </div>
 
+    <!-- ATLANTIDE -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/museoatlantide.jpeg" alt="Atlantide Museo Subacqueo">
@@ -407,13 +574,15 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
         <p>Un museo unico: le opere si ammirano <strong>sott'acqua</strong>. Tra i fondali dell'Isola di Cirella, sculture riposano tra posidonia e pesci. Accessibile con semplice snorkeling.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Isola+di+Cirella+Diamante" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Isola di Cirella, Diamante — Vedi su Maps
+          Isola di Cirella, Diamante (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
         <p>Le sculture di Francesco Minuti sono diventate parte dell'ecosistema marino: pesci, polipi e alghe le abitano quotidianamente. Per raggiungerle bastano maschera e pinne, a pochi metri dalla riva dell'Isola di Cirella. Un'esperienza tra arte, natura e silenzio sommerso.</p>
+        <a class="ext-link cs" href="https://calabriastraordinaria.it/idee-di-viaggio/atlantide-il-museo-subacqueo-dellisola-di-cirella" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Isola+Cirella+museo+subacqueo" target="_blank">Google Maps</a>
+        <span class="credits-note">Approfondimento a cura di <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a></span>
       </div>
     </div>
 
@@ -427,6 +596,7 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
   <p class="section-sub">Cascate nascoste, archi scolpiti dal mare, gole selvagge e sentieri tra boschi ancora intatti.</p>
   <div class="cards-grid">
 
+    <!-- CASCATA DEL VUGLIO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/cascatavuglio.jpeg" alt="Cascata del Vuglio">
@@ -434,19 +604,24 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Cascata del Vuglio</h3>
-        <p>A pochi minuti dal centro storico di Diamante, tra felci e liane, si nasconde la Cascata del Vuglio in un <strong>paesaggio incontaminato</strong>. Un sentiero breve e immerso nel verde.</p>
-        <a class="location-note" href="https://www.google.com/maps/search/Cascata+del+Vuglio+Diamante" target="_blank" onclick="event.stopPropagation()">
+        <p>Immersa in un <strong>paesaggio incontaminato</strong> nel comune di Sangineto, la Cascata del Vuglio è raggiungibile con una breve passeggiata tra felci e liane. E ha persino fatto da set cinematografico!</p>
+        <a class="location-note" href="https://www.google.com/maps/search/Cascata+del+Vuglio+Sangineto" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Diamante (CS) — Vedi su Maps
+          Sangineto (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Riscoperta e valorizzata da un gruppo di volontari locali, la Cascata del Vuglio si raggiunge con una facile passeggiata di circa 15 minuti dal centro di Diamante. Immersa in una gola rocciosa di vegetazione fitta, e ideale per una pausa fresca nelle calde giornate estive.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/search/Cascata+Vuglio+Diamante" target="_blank">Vedi su Google Maps</a>
+        <p>Riscoperta e valorizzata da un gruppo di volontari locali, la Cascata del Vuglio si trova nel comune di Sangineto. Immersa in una gola rocciosa di vegetazione fitta, è ideale per una pausa fresca nelle calde giornate estive.</p>
+        <p><strong>Prenotazione obbligatoria:</strong> chiamare il <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> ore 10:00–13:00 e 14:30–17:30.</p>
+        <p><strong>Set cinematografico:</strong> Sangineto ha ospitato le riprese del film <em>"La Voce di Cupido"</em>, commedia romantica diretta da Ago Panini, cofinanziata dalla Calabria Film Commission, andata in onda su Rai nel dicembre 2025.</p>
+        <a class="ext-link verde" href="https://www.cascatadelvuglio.it" target="_blank">Sito Ufficiale</a>
+        <a class="ext-link verde" href="https://www.inrivieradeicedri.it/sangineto-cascata-del-vuglio.html" target="_blank">In Riviera dei Cedri</a>
+        <a class="ext-link" href="https://www.google.com/maps/search/Cascata+Vuglio+Sangineto" target="_blank">Google Maps</a>
       </div>
     </div>
 
+    <!-- ARCOMAGNO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/arcomagno.jpeg" alt="Arcomagno">
@@ -454,19 +629,23 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Arcomagno</h3>
-        <p>Un maestoso <strong>arco naturale</strong> scolpito dal mare che custodisce una laguna a mezzaluna segreta — la Grotta del Saraceno. Uno dei luoghi piu belli della Calabria.</p>
+        <p>Un maestoso <strong>arco naturale</strong> scolpito dal mare che custodisce una laguna a mezzaluna segreta — la Grotta del Saraceno. Uno dei luoghi più belli della Calabria.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Arcomagno,+San+Nicola+Arcella" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           San Nicola Arcella (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>L'arco naturale, alto decine di metri, incornicia una piccola spiaggia di ciottoli bianchi e un'acqua turchese intenso. Vi si accede a piedi tramite sentiero dalla spiaggia di San Nicola Arcella, oppure in barca. Al tramonto lo spettacolo e straordinario.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/place/Arcomagno" target="_blank">Vedi su Google Maps</a>
+        <p>L'arco naturale, alto decine di metri, incornicia una piccola spiaggia di ciottoli bianchi e un'acqua turchese intenso. Vi si accede a piedi tramite sentiero dalla spiaggia di San Nicola Arcella, oppure in barca. Al tramonto lo spettacolo è straordinario.</p>
+        <a class="ext-link verde" href="https://www.arcomagnocalabria.it" target="_blank">Arcomagno.it</a>
+        <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/arcomagno-san-nicola-arcella" target="_blank">Calabria Straordinaria</a>
+        <a class="ext-link" href="https://www.google.com/maps/place/Arcomagno" target="_blank">Google Maps</a>
+        <span class="credits-note">Approfondimento da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a></span>
       </div>
     </div>
 
+    <!-- CAMMINO SAN FRANCESCO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/camminosanfrancesco.jpeg" alt="Cammino di San Francesco">
@@ -480,11 +659,11 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
           Catena Costiera, Calabria — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Da San Marco Argentano fino al Santuario di Paterno Calabro, con tappe intermedie a Paola. Per esperienze piu brevi: la Via del Giovane e la Via dell'Eremita. Periodo ideale: primavera e autunno. Lungo il percorso, borghi, eremi e punti panoramici sul Tirreno.</p>
-        <a class="ext-link verde" href="https://www.google.com/maps/search/Cammino+San+Francesco+Calabria" target="_blank">Google Maps</a>
-        <a class="ext-link" href="https://www.camminosanfrancesco.it" target="_blank">Sito ufficiale</a>
+        <p>Da San Marco Argentano fino al Santuario di Paternò Calabro, con tappe intermedie a Paola. Per esperienze più brevi: la Via del Giovane e la Via dell'Eremita. Periodo ideale: primavera e autunno. Lungo il percorso, borghi, eremi e punti panoramici sul Tirreno.</p>
+        <a class="ext-link verde" href="https://www.ilcamminodisanfrancesco.it" target="_blank">Sito Ufficiale</a>
+        <a class="ext-link" href="https://www.google.com/maps/search/Cammino+San+Francesco+Calabria" target="_blank">Google Maps</a>
       </div>
     </div>
 
@@ -501,9 +680,10 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
 <section id="storia" class="bg-lilla">
   <div class="section-label">Archeologia e Storia</div>
   <div class="section-title">La storia che ci circonda</div>
-  <p class="section-sub">Dalla preistoria alla Magna Grecia, musei e siti che raccontano millenni di civilta.</p>
+  <p class="section-sub">Dalla preistoria alla Magna Grecia, musei e siti che raccontano millenni di civiltà.</p>
   <div class="cards-grid">
 
+    <!-- GROTTA DEL ROMITO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/grottaromito.jpeg" alt="Grotta del Romito">
@@ -511,20 +691,21 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Grotta del Romito</h3>
-        <p>Una delle piu antiche testimonianze di arte preistorica in Europa: graffito di un bovide <strong>scolpito oltre 10.000 anni fa</strong>. Visitabile con passerelle e visite guidate.</p>
+        <p>Una delle più antiche testimonianze di arte preistorica in Europa: graffito di un bovide <strong>scolpito oltre 12.000 anni fa</strong>. Visitabile con passerelle e visite guidate.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Grotta+del+Romito,+Papasidero" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Papasidero (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il bovide inciso nella roccia risale a circa 12.000 anni fa ed e uno dei piu grandi e meglio conservati esempi di arte rupestre italiana. Il sito include anche sepolture e reperti dell'Homo sapiens nel Paleolitico. Accessibile tramite passerelle con visita guidata.</p>
+        <p>Il bovide inciso nella roccia risale a circa 12.000 anni fa ed è uno dei più grandi e meglio conservati esempi di arte rupestre italiana. Il sito include anche sepolture e reperti dell'Homo sapiens nel Paleolitico. Accessibile tramite passerelle con visita guidata.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Grotta+del+Romito" target="_blank">Google Maps</a>
         <a class="ext-link verde" href="https://it.wikipedia.org/wiki/Grotta_del_Romito" target="_blank">Approfondisci</a>
       </div>
     </div>
 
+    <!-- PARCO LAOS -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/parcoarcheologicolaos.jpeg" alt="Parco Laos">
@@ -538,33 +719,40 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
           Santa Maria del Cedro (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
         <p>Fondata nel VI sec. a.C. da coloni greci provenienti da Sibari. Il sito ospita la "Casa con la Rampa" e la "Casa col Mosaico". Il contesto paesaggistico, tra vigneti e mare, lo rende straordinario. Parco aperto al pubblico.</p>
+        <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/parco-archeologico-di-laos-santa-maria-del-cedro" target="_blank">Calabria Straordinaria</a>
+        <a class="ext-link verde" href="https://www.sitiarcheologiciditalia.it/laos-antica-citta-greca/" target="_blank">Siti Archeologici d'Italia</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Parco+Laos" target="_blank">Google Maps</a>
+        <span class="credits-note">Approfondimento da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> e <a href="https://www.sitiarcheologiciditalia.it" target="_blank">Siti Archeologici d'Italia</a></span>
       </div>
     </div>
 
+    <!-- MUSEO DEI BRETTI -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/museodeibretti.jpeg" alt="Museo Bretti">
         <span class="act-tag tag-storia">Museo</span>
       </div>
       <div class="act-card-body">
-        <h3>Museo dei Bretti e del Mare</h3>
+        <h3>Museo dei Brettii e del Mare</h3>
         <p>Racconta la storia del territorio tra IV e III sec. a.C. Da non perdere la sezione marina con <strong>anfore rinvenute lungo la costa</strong> e la collezione cartografica Losardo.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Museo+dei+Bretti+Cetraro" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Cetraro (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Allestito con criterio didattico, racconta il popolo dei Bretti e il territorio costiero. Ospita anfore, ancore e reperti pescati lungo tutta la Riviera, oltre alla preziosa collezione cartografica donata dal professor Raffaello Losardo.</p>
+        <p>Allestito con criterio didattico, racconta il popolo dei Brettii e il territorio costiero. Ospita anfore, ancore e reperti pescati lungo tutta la Riviera, oltre alla preziosa collezione cartografica donata dal professor Raffaello Losardo.</p>
+        <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/museo-dei-brettii-e-del-mare-cetraro" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Museo+Bretti+Mare+Cetraro" target="_blank">Google Maps</a>
+        <span class="credits-note">Approfondimento da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a></span>
       </div>
     </div>
 
+    <!-- CASTELLO DEL PRINCIPE -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/castellodelprincipe.jpeg" alt="Castello del Principe">
@@ -572,16 +760,21 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Castello del Principe</h3>
-        <p>Il <strong>Castello di Sangineto</strong> del XV secolo — quattro torri cilindriche, mura merlate, costruito dai Principi Sanseverino. D'estate diventa una suggestiva discoteca all'aperto.</p>
+        <p>Il <strong>Castello di Sangineto</strong> del XV secolo — quattro torri cilindriche, mura merlate, costruito dai Sanseverino di Bisignano. Luogo del cuore FAI, ancora oggi vivo e attivo.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Castello+di+Sangineto" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Sangineto (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Affacciato sulla foce del fiume, il castello e di pianta regolare con corte centrale, cappella, scuderie e saloni affrescati. Un tempo raggiungibile solo tramite ponte levatoio. D'estate ospita eventi e, per qualche serata speciale, si trasforma in discoteca tra le mura medievali.</p>
+        <p>Affacciato sulla foce del fiume, il Castello di Sangineto è una fortezza del XV secolo edificata dai Sanseverino di Bisignano. Caratterizzato da quattro torri cilindriche in pietra locale e un ampio cortile interno, ha ospitato le famiglie Majorana e Firrao, fungendo da carcere durante la Prima Guerra Mondiale. Oggi è un luogo del cuore FAI e una suggestiva location per eventi.</p>
+        <p>Durante tutto l'anno il Castello organizza <strong>giornate culturali, mercatini di Natale</strong> nel periodo natalizio e altre attività per la comunità. D'estate, per qualche serata speciale, si trasforma in discoteca tra le mura medievali.</p>
+        <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/castello-del-principe-sangineto" target="_blank">Calabria Straordinaria</a>
+        <a class="ext-link verde" href="https://www.dimorestoricheitaliane.it/strutture/castello-del-principe/" target="_blank">Dimore Storiche Italiane</a>
+        <a class="ext-link ig" href="https://www.instagram.com/castellodelprincipe" target="_blank">Instagram</a>
         <a class="ext-link" href="https://www.google.com/maps/place/Castello+Sangineto" target="_blank">Google Maps</a>
+        <span class="credits-note">Informazioni da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> e <a href="https://www.dimorestoricheitaliane.it" target="_blank">Dimore Storiche Italiane</a></span>
       </div>
     </div>
 
@@ -590,9 +783,9 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
 
 <!-- LUOGHI SACRI -->
 <section id="sacri" class="bg-white">
-  <div class="section-label">Spiritualita</div>
+  <div class="section-label">Spiritualità</div>
   <div class="section-title">Luoghi sacri</div>
-  <p class="section-sub">Fede, arte e spiritualita in luoghi che emozionano l'anima e raccontano secoli di devozione.</p>
+  <p class="section-sub">Fede, arte e spiritualità in luoghi che emozionano l'anima e raccontano secoli di devozione.</p>
   <div class="cards-grid">
 
     <div class="act-card reveal" onclick="togglePanel(this)">
@@ -602,17 +795,17 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Santuario di San Francesco di Paola</h3>
-        <p>Tra i piu importanti luoghi di pellegrinaggio del Sud Italia, dedicato al <strong>patrono della Calabria</strong>. Dalla basilica moderna alla "Fonte della Cucchiarella" fino all'eremo.</p>
+        <p>Tra i più importanti luoghi di pellegrinaggio del Sud Italia, dedicato al <strong>patrono della Calabria</strong>. Dalla basilica moderna alla "Fonte della Cucchiarella" fino all'eremo.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Santuario+di+San+Francesco+di+Paola" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Paola (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
         <p>Il complesso comprende la basilica moderna, la basilica antica con le reliquie del santo, l'eremo dove San Francesco visse in solitudine e la suggestiva Fonte della Cucchiarella. Centinaia di migliaia di pellegrini ogni anno. Un luogo di fede, arte e storia profonda.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Santuario+San+Francesco+Paola" target="_blank">Google Maps</a>
-        <a class="ext-link verde" href="https://www.santuariopaola.it" target="_blank">Sito ufficiale</a>
+        <a class="ext-link verde" href="https://www.santuariopaola.it" target="_blank">Sito Ufficiale</a>
       </div>
     </div>
 
@@ -623,34 +816,20 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
       </div>
       <div class="act-card-body">
         <h3>Convento dei Cappuccini</h3>
-        <p>Belvedere Marittimo e il <strong>"borgo degli innamorati"</strong>: nel convento del 1595 sono custodite le reliquie di San Valentino. Il 14 febbraio coppie da tutta Italia si ritrovano qui.</p>
+        <p>Belvedere Marittimo è il <strong>"borgo degli innamorati"</strong>: nel convento del 1595 sono custodite le reliquie di San Valentino. Il 14 febbraio coppie da tutta Italia si ritrovano qui.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Convento+Cappuccini+Belvedere+Marittimo" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Belvedere Marittimo (CS) — Vedi su Maps
         </a>
       </div>
-      <button class="expand-btn">Scopri di piu</button>
+      <button class="expand-btn">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il convento conserva altari barocchi, affreschi mariani e opere d'arte sacra. Le reliquie di San Valentino lo rendono meta di pellegrinaggio romantico unica in Italia. Belvedere Marittimo, con il suo centro storico medievale e la vista sul mare, e uno dei borghi piu affascinanti della Riviera.</p>
+        <p>Il convento conserva altari barocchi, affreschi mariani e opere d'arte sacra. Le reliquie di San Valentino lo rendono meta di pellegrinaggio romantico unica in Italia. Belvedere Marittimo, con il suo centro storico medievale e la vista sul mare, è uno dei borghi più affascinanti della Riviera.</p>
         <a class="ext-link" href="https://www.google.com/maps/search/Convento+Cappuccini+Belvedere+Marittimo" target="_blank">Google Maps</a>
       </div>
     </div>
 
   </div>
-</section>
-
-<!-- MAPPA COMPLETA -->
-<section id="mappa-riviera" class="bg-celeste">
-  <div class="section-label">Orientati sul territorio</div>
-  <div class="section-title">Piantina della Riviera</div>
-  <p class="section-sub">Esplora tutti i luoghi della Riviera dei Cedri sulla mappa interattiva — dalla costa alle montagne, dai borghi ai siti di interesse.</p>
-  <div class="mappa-full reveal">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d160000!2d15.85!3d39.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sit!2sit!4v1712600000001" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
-  <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--testo);font-weight:600;">
-    Clicca sulla mappa per navigare — oppure
-    <a href="https://www.google.com/maps/search/Riviera+dei+Cedri" target="_blank" style="color:var(--blu);font-weight:800;">apri in Google Maps</a>
-  </p>
 </section>
 
 <div class="wave" style="background:var(--celeste-pale);">
@@ -661,9 +840,9 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
 
 <!-- COME MUOVERSI -->
 <section id="muoversi">
-  <div class="section-label">Mobilita</div>
+  <div class="section-label">Mobilità</div>
   <div class="section-title">Come muoversi?</div>
-  <p class="section-sub">La Riviera dei Cedri e ben collegata. Clicca sulle stazioni per vederle su Maps, o acquista i biglietti direttamente su Trenitalia.</p>
+  <p class="section-sub">La Riviera dei Cedri è ben collegata. Clicca sulle stazioni per vederle su Maps, o acquista i biglietti direttamente su Trenitalia.</p>
   <div class="transport-grid">
 
     <div class="transport-box reveal">
@@ -703,33 +882,60 @@ footer{background:var(--testo);color:white;padding:48px 60px;display:flex;align-
         <h4>Link utili</h4>
         <a class="util-link" href="https://www.trenitalia.com" target="_blank">Trenitalia — Acquista biglietti online</a>
         <a class="util-link" href="https://www.google.com/maps/search/Riviera+dei+Cedri" target="_blank">Google Maps — Riviera dei Cedri</a>
+        <a class="util-link" href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria — Turismo Calabria</a>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- CALABRIA STRAORDINARIA BANNER -->
+<div class="cs-banner">
+  <img src="https://calabriastraordinaria.it/images/logo-calabria-straordinaria.svg" alt="Calabria Straordinaria" onerror="this.style.display='none'">
+  <div class="cs-banner-text">Scopri la Calabria con <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — il portale ufficiale del turismo calabrese</div>
+</div>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <h3>Hotel delle Stelle</h3>
-    <p>Beach Resort · Riviera dei Cedri, Calabria</p>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img class="footer-logo-img"
+           src="https://raw.githubusercontent.com/hostegi/imgriviera/main/logohotel.jpeg"
+           alt="Hotel delle Stelle"
+           onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hostegi/imgriviera/main/logovettoriale.svg'">
+      <h3>Hotel delle Stelle</h3>
+      <p>Beach Resort · Riviera dei Cedri, Calabria</p>
+    </div>
+    <div class="footer-tagline">Visite · Escursioni · Esperienze · Mobilità<br><em>La tua avventura inizia qui.</em></div>
+    <div class="footer-contact">
+      <p>Per informazioni ed escursioni:</p>
+      <p><strong>Reception Hotel delle Stelle</strong></p>
+      <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.3);">Contenuti a cura di Hotel delle Stelle Beach Resort</p>
+    </div>
   </div>
-  <div class="footer-tagline">Visite · Escursioni · Esperienze · Mobilita<br><em>La tua avventura inizia qui.</em></div>
-  <div class="footer-contact">
-    <p>Per informazioni ed escursioni:</p>
-    <p><strong>Reception Hotel delle Stelle</strong></p>
-    <p style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.35);">Contenuti a cura di Hotel delle Stelle Beach Resort</p>
+  <div class="footer-cs">
+    Alcuni contenuti di approfondimento sono tratti da
+    <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a>,
+    <a href="https://www.flytirreno.com" target="_blank">FlyTirreno</a>,
+    <a href="https://www.cascatadelvuglio.it" target="_blank">Cascata del Vuglio</a>,
+    <a href="https://www.arcomagnocalabria.it" target="_blank">Arcomagno Calabria</a>
+    e altri autori citati nelle singole sezioni. Tutti i diritti appartengono ai rispettivi titolari.
   </div>
 </footer>
 
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Torna su">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <script>
+// Reveal on scroll
 const reveals = document.querySelectorAll('.reveal');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
 reveals.forEach(el => obs.observe(el));
 
+// Expand panels
 function togglePanel(card) {
   const panel = card.querySelector('.expand-panel');
   const btn = card.querySelector('.expand-btn');
@@ -738,9 +944,50 @@ function togglePanel(card) {
   document.querySelectorAll('.expand-panel.open').forEach(p => {
     p.classList.remove('open');
     const b = p.closest('.act-card').querySelector('.expand-btn');
-    if (b) b.textContent = 'Scopri di piu';
+    if (b) b.textContent = 'Scopri di più';
   });
   if (!isOpen) { panel.classList.add('open'); btn.textContent = 'Chiudi'; }
+}
+
+// Animated counters
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const duration = 1600;
+  const steps = 50;
+  const increment = target / steps;
+  let current = 0;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = target >= 1000 ? Math.round(current).toLocaleString('it') + '+' : Math.round(current);
+  }, duration / steps);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObs.observe(el));
+
+// Back to top
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('show', window.scrollY > 400);
+});
+
+// Hamburger drawer
+function toggleDrawer() {
+  const drawer = document.getElementById('navDrawer');
+  const overlay = document.getElementById('navOverlay');
+  const btn = document.getElementById('hamburger');
+  drawer.classList.toggle('open');
+  overlay.classList.toggle('show');
+  btn.classList.toggle('open');
+}
+function closeDrawer() {
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('show');
+  document.getElementById('hamburger').classList.remove('open');
 }
 </script>
 </body>
