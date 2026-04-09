@@ -18,38 +18,24 @@
 html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);overflow-x:hidden}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(250,246,238,.97);backdrop-filter:blur(14px);border-bottom:2px solid var(--celeste);display:flex;align-items:center;justify-content:space-between;padding:8px 22px;box-shadow:0 2px 24px var(--shadow)}
-.nav-logo{display:flex;align-items:center;gap:14px}
-.nav-logo-img{height:80px;width:auto;border-radius:0;object-fit:contain;flex-shrink:0}
-.hotel-name{font-weight:900;font-size:13px;color:var(--blu);line-height:1.35;text-transform:uppercase;letter-spacing:.8px}
-.hotel-name small{display:block;font-size:10px;font-weight:600;color:var(--blu-chiaro);text-transform:none;letter-spacing:.3px}
+/* PROGRESS BAR SCORRIMENTO */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:rgba(168,216,234,.3)}
+.scroll-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--verde-scuro),var(--blu-chiaro));transition:width .1s linear;border-radius:0 2px 2px 0}
 
-/* HAMBURGER */
-.hamburger{background:none;border:2px solid var(--celeste);border-radius:10px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:5px;transition:all .2s}
-.hamburger:hover{background:var(--celeste-pale)}
-.hamburger span{display:block;width:22px;height:2.5px;background:var(--blu);border-radius:2px;transition:all .3s}
-.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-
-/* MOBILE DRAWER */
-.nav-drawer{position:fixed;top:0;right:0;bottom:0;width:min(280px,80vw);background:rgba(250,246,238,.98);backdrop-filter:blur(20px);z-index:199;box-shadow:-4px 0 32px rgba(42,111,168,.18);transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);padding-top:100px;display:flex;flex-direction:column}
-.nav-drawer.open{transform:translateX(0)}
-.nav-drawer a{text-decoration:none;font-size:15px;font-weight:800;color:var(--blu);padding:16px 28px;border-bottom:1px solid var(--celeste-pale);text-transform:uppercase;letter-spacing:.8px;transition:background .2s}
-.nav-drawer a:hover{background:var(--celeste-pale)}
-.nav-overlay{position:fixed;inset:0;z-index:198;background:rgba(26,58,92,.35);opacity:0;pointer-events:none;transition:opacity .3s}
-.nav-overlay.show{opacity:1;pointer-events:all}
-
-/* Nascondi vecchi nav-links desktop */
+/* Nascondi nav e drawer */
+nav{display:none}
+.nav-drawer{display:none}
+.nav-overlay{display:none}
 .nav-links{display:none}
+
+.hero-logo{height:110px;width:auto;object-fit:contain;display:block;margin-bottom:22px}
 
 /* HERO */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(250,246,238,.97) 0%,rgba(214,238,248,.90) 42%,rgba(42,111,168,.18) 100%)}
-.hero-content{position:relative;z-index:2;padding:130px 60px 90px;max-width:640px;animation:fadeUp .9s ease both}
+.hero-content{position:relative;z-index:2;padding:80px 60px 90px;max-width:640px;animation:fadeUp .9s ease both}
 .hero-tag{display:inline-block;background:var(--verde);color:white;font-size:10.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:22px}
 .hero h1{font-family:'Caveat',cursive;font-size:clamp(60px,9vw,104px);color:var(--blu);line-height:.9;margin-bottom:14px}
 .hero h2{font-size:clamp(12px,1.7vw,15px);font-weight:900;color:var(--verde-scuro);text-transform:uppercase;letter-spacing:3px;margin-bottom:18px}
@@ -232,7 +218,8 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
   .hotel-name{font-size:11.5px}
 
   /* hero */
-  .hero-content{padding:100px 20px 70px;max-width:100%}
+  .hero-content{padding:60px 20px 70px;max-width:100%}
+  .hero-logo{height:80px}
   .hero h1{font-size:clamp(52px,14vw,80px)}
   .hero p{font-size:15px}
   .hero-badges{gap:8px}
@@ -281,33 +268,8 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 </head>
 <body>
 
-<!-- NAV OVERLAY -->
-<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
-
-<!-- DRAWER -->
-<div class="nav-drawer" id="navDrawer">
-  <a href="#visitare" onclick="closeDrawer()">Cosa Visitare</a>
-  <a href="#esperienze" onclick="closeDrawer()">Esperienze</a>
-  <a href="#cultura" onclick="closeDrawer()">Cultura</a>
-  <a href="#natura" onclick="closeDrawer()">Natura</a>
-  <a href="#storia" onclick="closeDrawer()">Storia</a>
-  <a href="#sacri" onclick="closeDrawer()">Luoghi Sacri</a>
-  <a href="#muoversi" onclick="closeDrawer()">Come Muoversi</a>
-</div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <img class="nav-logo-img"
-         src="https://raw.githubusercontent.com/hostegi/imgriviera/main/logohotel.jpeg"
-         alt="Hotel delle Stelle"
-         onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hostegi/imgriviera/main/logovettoriale.svg'">
-    <div class="hotel-name">Hotel delle Stelle<small>Beach Resort · Riviera dei Cedri</small></div>
-  </div>
-  <button class="hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<!-- BARRA SCORRIMENTO -->
+<div class="scroll-progress"><div class="scroll-progress-fill" id="scrollFill"></div></div>
 
 <!-- HERO -->
 <div class="hero">
@@ -316,6 +278,10 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
+    <img class="hero-logo"
+         src="https://raw.githubusercontent.com/hostegi/imgriviera/main/logohotel.jpeg"
+         alt="Hotel delle Stelle"
+         onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hostegi/imgriviera/main/logovettoriale.svg'">
     <div class="hero-tag">Riviera dei Cedri · Calabria</div>
     <h1>Bellezze<br>intorno<br>a noi</h1>
     <h2>In giro per la Riviera dei Cedri</h2>
@@ -969,10 +935,15 @@ const counterObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObs.observe(el));
 
-// Back to top
+// Back to top + scroll progress
 const backTop = document.getElementById('backTop');
+const scrollFill = document.getElementById('scrollFill');
 window.addEventListener('scroll', () => {
-  backTop.classList.toggle('show', window.scrollY > 400);
+  const scrolled = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+  scrollFill.style.width = pct + '%';
+  backTop.classList.toggle('show', scrolled > 400);
 });
 
 // Hamburger drawer
@@ -980,14 +951,17 @@ function toggleDrawer() {
   const drawer = document.getElementById('navDrawer');
   const overlay = document.getElementById('navOverlay');
   const btn = document.getElementById('hamburger');
-  drawer.classList.toggle('open');
-  overlay.classList.toggle('show');
-  btn.classList.toggle('open');
+  if(drawer) drawer.classList.toggle('open');
+  if(overlay) overlay.classList.toggle('show');
+  if(btn) btn.classList.toggle('open');
 }
 function closeDrawer() {
-  document.getElementById('navDrawer').classList.remove('open');
-  document.getElementById('navOverlay').classList.remove('show');
-  document.getElementById('hamburger').classList.remove('open');
+  const drawer = document.getElementById('navDrawer');
+  const overlay = document.getElementById('navOverlay');
+  const btn = document.getElementById('hamburger');
+  if(drawer) drawer.classList.remove('open');
+  if(overlay) overlay.classList.remove('show');
+  if(btn) btn.classList.remove('open');
 }
 </script>
 </body>
