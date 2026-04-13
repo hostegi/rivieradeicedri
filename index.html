@@ -24,22 +24,26 @@ body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--testo);
 /* Fallback font vicino a Caveat per ridurre il flash */
 .hero h1,.section-title,.big-quote,.footer-brand h3{font-family:'Caveat',cursive,'Comic Sans MS',cursive}
 
-/* SOMMARIO SEZIONI LATERALE */
-.side-nav{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;align-items:flex-start;gap:0;pointer-events:none}
-.side-nav-item{display:flex;align-items:center;gap:0;cursor:pointer;pointer-events:all;padding:5px 0;overflow:hidden}
-.side-nav-dot{width:5px;height:28px;background:rgba(168,216,234,.4);flex-shrink:0;transition:all .3s;border-radius:0 3px 3px 0}
-.side-nav-label{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--blu);background:rgba(250,246,238,.95);padding:5px 14px 5px 12px;border-radius:0 20px 20px 0;white-space:nowrap;max-width:0;overflow:hidden;opacity:0;transition:max-width .35s ease,opacity .3s ease,background .2s;box-shadow:2px 0 12px rgba(42,111,168,.12)}
-.side-nav-item:hover .side-nav-label,
-.side-nav-item.active .side-nav-label{max-width:180px;opacity:1}
-.side-nav-item.active .side-nav-dot{background:var(--blu);height:36px}
-.side-nav-item:hover .side-nav-dot{background:var(--blu-chiaro)}
-.side-nav-item.active .side-nav-label{background:var(--blu);color:white}
+/* LANGUAGE SWITCHER */
+.lang-bar{position:fixed;top:12px;right:12px;z-index:400;display:flex;gap:6px}
+.lang-btn{background:rgba(250,246,238,.92);border:1.5px solid var(--celeste);border-radius:18px;padding:5px 12px;font-size:11px;font-weight:800;color:var(--blu);cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:all .22s;font-family:'Nunito',sans-serif;backdrop-filter:blur(8px);box-shadow:0 2px 10px var(--shadow)}
+.lang-btn:hover{background:var(--celeste-pale);border-color:var(--blu-chiaro)}
+.lang-btn.active{background:var(--blu);color:white;border-color:var(--blu)}
+@media(max-width:480px){
+  .lang-bar{top:8px;right:8px;gap:4px}
+  .lang-btn{padding:4px 9px;font-size:10px}
+}
+
+/* SOMMARIO SEZIONI LATERALE — solo pallini */
+.side-nav{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;align-items:flex-start;gap:4px;pointer-events:none;padding:8px 0}
+.side-nav-item{display:flex;align-items:center;cursor:pointer;pointer-events:all;padding:3px 0}
+.side-nav-dot{width:5px;height:24px;background:rgba(168,216,234,.35);flex-shrink:0;transition:all .3s cubic-bezier(.4,0,.2,1);border-radius:0 4px 4px 0}
+.side-nav-item:hover .side-nav-dot{background:var(--blu-chiaro);width:7px}
+.side-nav-item.active .side-nav-dot{background:var(--blu);height:36px;width:6px}
 
 @media(max-width:600px){
-  .side-nav{display:flex}
-  .side-nav-dot{width:4px;height:22px}
-  .side-nav-item.active .side-nav-dot{height:30px}
-  .side-nav-label{display:none}
+  .side-nav-dot{width:4px;height:20px}
+  .side-nav-item.active .side-nav-dot{height:28px;width:5px}
 }
 
 /* Nascondi nav e drawer */
@@ -295,29 +299,23 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 </head>
 <body>
 
+<!-- LANGUAGE SWITCHER -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('it')">IT</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" onclick="setLang('fr')">FR</button>
+</div>
+
 <!-- SOMMARIO SEZIONI LATERALE -->
 <nav class="side-nav" id="sideNav">
-  <div class="side-nav-item" data-target="esperienze" onclick="scrollTo('#esperienze')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Esperienze</span>
-  </div>
-  <div class="side-nav-item" data-target="visitare" onclick="scrollTo('#visitare')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Cosa Visitare</span>
-  </div>
-  <div class="side-nav-item" data-target="cultura" onclick="scrollTo('#cultura')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Cultura</span>
-  </div>
-  <div class="side-nav-item" data-target="natura" onclick="scrollTo('#natura')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Natura</span>
-  </div>
-  <div class="side-nav-item" data-target="storia" onclick="scrollTo('#storia')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Storia</span>
-  </div>
-  <div class="side-nav-item" data-target="sacri" onclick="scrollTo('#sacri')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Luoghi Sacri</span>
-  </div>
-  <div class="side-nav-item" data-target="muoversi" onclick="scrollTo('#muoversi')">
-    <span class="side-nav-dot"></span><span class="side-nav-label">Come Muoversi</span>
-  </div>
+  <div class="side-nav-item" data-target="visitare" onclick="scrollTo('#visitare')"><span class="side-nav-dot"></span></div>
+  <div class="side-nav-item" data-target="esperienze" onclick="scrollTo('#esperienze')"><span class="side-nav-dot"></span></div>
+  <div class="side-nav-item" data-target="cultura" onclick="scrollTo('#cultura')"><span class="side-nav-dot"></span></div>
+  <div class="side-nav-item" data-target="natura" onclick="scrollTo('#natura')"><span class="side-nav-dot"></span></div>
+  <div class="side-nav-item" data-target="storia" onclick="scrollTo('#storia')"><span class="side-nav-dot"></span></div>
+  <div class="side-nav-item" data-target="sacri" onclick="scrollTo('#sacri')"><span class="side-nav-dot"></span></div>
+  <div class="side-nav-item" data-target="muoversi" onclick="scrollTo('#muoversi')"><span class="side-nav-dot"></span></div>
 </nav>
 
 <!-- HERO -->
@@ -331,39 +329,39 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
          src="https://raw.githubusercontent.com/hostegi/imgriviera/main/logohotel.jpeg"
          alt="Hotel delle Stelle"
          onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hostegi/imgriviera/main/logovettoriale.svg'">
-    <div class="hero-tag">Riviera dei Cedri · Calabria</div>
-    <h1>Bellezze<br>intorno<br>a noi</h1>
-    <h2>In giro per la Riviera dei Cedri</h2>
-    <p>Un territorio autentico, ricco di storia, natura e tradizioni, che affascina con i suoi paesaggi vari e la bellezza ancora intatta. Un invito a scoprire una Calabria diversa, tra mare, cultura e silenzi che parlano.</p>
+    <div class="hero-tag" data-i18n="hero_tag">Riviera dei Cedri · Calabria</div>
+    <h1 data-i18n="hero_h1">Bellezze<br>intorno<br>a noi</h1>
+    <h2 data-i18n="hero_h2">In giro per la Riviera dei Cedri</h2>
+    <p data-i18n="hero_p">Un territorio autentico, ricco di storia, natura e tradizioni, che affascina con i suoi paesaggi vari e la bellezza ancora intatta. Un invito a scoprire una Calabria diversa, tra mare, cultura e silenzi che parlano.</p>
     <div class="hero-badges">
-      <div class="badge">Mare cristallino</div>
-      <div class="badge">Montagne verdi</div>
-      <div class="badge">Storia millenaria</div>
-      <div class="badge">Esperienze uniche</div>
+      <div class="badge" data-i18n="badge1">Mare cristallino</div>
+      <div class="badge" data-i18n="badge2">Montagne verdi</div>
+      <div class="badge" data-i18n="badge3">Storia millenaria</div>
+      <div class="badge" data-i18n="badge4">Esperienze uniche</div>
     </div>
   </div>
   <div class="scroll-hint">
-    <span>Scopri</span>
+    <span data-i18n="scroll_hint">Scopri</span>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 </div>
 
 
 <div class="strip">
-  <div class="strip-keywords">Visite · Escursioni · Esperienze · Mobilità</div>
-  <div class="strip-sub">Scopri tutto quello che puoi fare durante il tuo soggiorno</div>
+  <div class="strip-keywords" data-i18n="strip_kw">Visite · Escursioni · Esperienze · Mobilità</div>
+  <div class="strip-sub" data-i18n="strip_sub">Scopri tutto quello che puoi fare durante il tuo soggiorno</div>
 </div>
 
 
 
 <!-- COSA VISITARE -->
 <section id="visitare" class="bg-white">
-  <div class="section-label">Il Territorio</div>
-  <div class="section-title">Cosa visitare?</div>
-  <p class="section-sub">Un intreccio di paesi affacciati sul mare e piccoli borghi tra colline e montagne. Un territorio ricco di colori, sapori e storie da scoprire.</p>
+  <div class="section-label" data-i18n="visitare_label">Il Territorio</div>
+  <div class="section-title" data-i18n="visitare_title">Cosa visitare?</div>
+  <p class="section-sub" data-i18n="visitare_sub">Un intreccio di paesi affacciati sul mare e piccoli borghi tra colline e montagne. Un territorio ricco di colori, sapori e storie da scoprire.</p>
   <div class="visitare-layout">
     <div class="towns-block reveal">
-      <div class="towns-label costa">Costa — 15 località balneari</div>
+      <div class="towns-label costa" data-i18n="coast_label">Costa — 15 località balneari</div>
       <div class="coast-grid">
         <span class="town-pill">Tortora</span><span class="town-pill">Praia a Mare</span>
         <span class="town-pill">San Nicola Arcella</span><span class="town-pill">Scalea</span>
@@ -374,7 +372,7 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
         <span class="town-pill">Guardia Piemontese</span><span class="town-pill">Fuscaldo</span>
         <span class="town-pill">Paola</span>
       </div>
-      <div class="towns-label montagna">Entroterra — Borghi da scoprire</div>
+      <div class="towns-label montagna" data-i18n="inland_label">Entroterra — Borghi da scoprire</div>
       <div class="coast-grid">
         <span class="town-pill mont">Aieta</span><span class="town-pill mont">Santa Domenica Talao</span>
         <span class="town-pill mont">Papasidero</span><span class="town-pill mont">Orsomarso</span>
@@ -384,47 +382,47 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
       <div class="maps-btn-wrap reveal">
         <a class="maps-btn" href="https://www.google.com/maps/search/Riviera+dei+Cedri+Calabria" target="_blank">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Esplora la Riviera su Google Maps
+          <span data-i18n="maps_btn">Esplora la Riviera su Google Maps</span>
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="big-quote">"Tra il <span>blu del mare</span> e il <span>verde delle montagne</span>,<br>ogni giorno qui è un'esperienza nuova."</div>
+<div class="big-quote" data-i18n="big_quote">"Tra il <span>blu del mare</span> e il <span>verde delle montagne</span>,<br>ogni giorno qui è un'esperienza nuova."</div>
 
 <!-- ESPERIENZE -->
 <section id="esperienze" class="bg-crema">
-  <div class="section-label">Avventura e Sport</div>
-  <div class="section-title">Esperienze continue</div>
-  <p class="section-sub">Dal cielo alle acque del Lao, la Riviera dei Cedri offre emozioni per tutti i gusti.</p>
+  <div class="section-label" data-i18n="esp_label">Avventura e Sport</div>
+  <div class="section-title" data-i18n="esp_title">Esperienze continue</div>
+  <p class="section-sub" data-i18n="esp_sub">Dal cielo alle acque del Lao, la Riviera dei Cedri offre emozioni per tutti i gusti.</p>
   <div class="cards-grid">
 
     <!-- PARAPENDIO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/parapendio.jpeg" alt="Parapendio">
-        <span class="act-tag tag-avventura">Avventura</span>
+        <span class="act-tag tag-avventura" data-i18n="tag_avventura">Avventura</span>
       </div>
       <div class="act-card-body">
-        <h3>Parapendio</h3>
-        <p>Un'esperienza mozzafiato: si decolla da <strong>600 metri di quota</strong> per un volo panoramico di 15–20 minuti, sorvolando paesaggi spettacolari tra mare e montagne. Istruttori abilitati inclusi.</p>
+        <h3 data-i18n="para_h3">Parapendio</h3>
+        <p data-i18n="para_p">Un'esperienza mozzafiato: si decolla da <strong>600 metri di quota</strong> per un volo panoramico di 15–20 minuti, sorvolando paesaggi spettacolari tra mare e montagne. Istruttori abilitati inclusi.</p>
         <a class="location-note" href="https://www.google.com/maps/search/parapendio+Praia+a+Mare+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Praia a Mare (CS) — Vedi su Maps
+          <span data-i18n="para_loc">Praia a Mare (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il volo in biposto (tandem) con istruttore è il modo più semplice per volare, senza esperienza pregressa. Si parte da Praia a Mare con il pulmino 4x4 della scuola fino alla zona di decollo, per poi atterrare dolcemente in spiaggia. Vista unica sull'Isola di Dino. Voli disponibili tutti i giorni 10:00–18:00 (estate) e 11:00–15:00 (inverno).</p>
-        <p>Gestito dalla <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.</p>
+        <p data-i18n="para_exp1">Il volo in biposto (tandem) con istruttore è il modo più semplice per volare, senza esperienza pregressa. Si parte da Praia a Mare con il pulmino 4x4 della scuola fino alla zona di decollo, per poi atterrare dolcemente in spiaggia. Vista unica sull'Isola di Dino. Voli disponibili tutti i giorni 10:00–18:00 (estate) e 11:00–15:00 (inverno).</p>
+        <p data-i18n="para_exp2">Gestito dalla <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.</p>
         <a class="contact-pill" href="tel:3336643336">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Prenota: 333 664 3336
+          <span data-i18n="para_book">Prenota: 333 664 3336</span>
         </a>
         <br><br>
         <a class="ext-link verde" href="https://www.flytirreno.com" target="_blank">FlyTirreno.com</a>
-        <a class="ext-link" href="https://www.tripadvisor.it/Attraction_Review-g194866-d4889927-Reviews-Parapendio_Praia_a_Mare-Praia_A_Mare_Province_of_Cosenza_Calabria.html" target="_blank">Recensioni TripAdvisor</a>
+        <a class="ext-link" href="https://www.tripadvisor.it/Attraction_Review-g194866-d4889927-Reviews-Parapendio_Praia_a_Mare-Praia_A_Mare_Province_of_Cosenza_Calabria.html" target="_blank" data-i18n="reviews_ta">Recensioni TripAdvisor</a>
         <a class="ext-link" href="https://www.google.com/maps/search/parapendio+Praia+a+Mare+Calabria" target="_blank">Google Maps</a>
       </div>
     </div>
@@ -433,19 +431,19 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/rafting.jpeg" alt="Rafting Fiume Lao">
-        <span class="act-tag tag-avventura">Avventura</span>
+        <span class="act-tag tag-avventura" data-i18n="tag_avventura">Avventura</span>
       </div>
       <div class="act-card-body">
-        <h3>Rafting Fiume Lao</h3>
-        <p>Tra le gole selvagge del Parco del Pollino, il <strong>fiume Lao</strong> offre rafting unico in Calabria. Oltre <strong>30 km navigabili</strong>, istruttori certificati, adatto anche ai principianti.</p>
+        <h3 data-i18n="raft_h3">Rafting Fiume Lao</h3>
+        <p data-i18n="raft_p">Tra le gole selvagge del Parco del Pollino, il <strong>fiume Lao</strong> offre rafting unico in Calabria. Oltre <strong>30 km navigabili</strong>, istruttori certificati, adatto anche ai principianti.</p>
         <a class="location-note" href="https://www.google.com/maps/search/rafting+fiume+Lao+Papasidero" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Papasidero (CS) — Vedi su Maps
+          <span data-i18n="raft_loc">Papasidero (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il Lao scorre tra pareti rocciose alte anche 200 metri. I tratti sono diversificati per difficoltà: ideali per famiglie, coppie e gruppi. Stagione migliore: aprile–settembre. I centri di rafting offrono attrezzatura completa e guide esperte del Parco Nazionale del Pollino.</p>
+        <p data-i18n="raft_exp">Il Lao scorre tra pareti rocciose alte anche 200 metri. I tratti sono diversificati per difficoltà: ideali per famiglie, coppie e gruppi. Stagione migliore: aprile–settembre. I centri di rafting offrono attrezzatura completa e guide esperte del Parco Nazionale del Pollino.</p>
         <a class="ext-link verde" href="https://www.raftingcalabria.it" target="_blank">Rafting Calabria</a>
         <a class="ext-link verde" href="https://laorafting.com" target="_blank">Lao Rafting</a>
         <a class="ext-link verde" href="https://www.raftingsulfiumelao.it" target="_blank">Rafting sul Fiume Lao</a>
@@ -457,19 +455,19 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/noleggibarche.jpeg" alt="Escursioni in Barca">
-        <span class="act-tag tag-mare">Mare</span>
+        <span class="act-tag tag-mare" data-i18n="tag_mare">Mare</span>
       </div>
       <div class="act-card-body">
-        <h3>Escursioni in Barca</h3>
-        <p>Tour tra grotte, calette e scogli spettacolari, con possibilità di <strong>aperitivi al tramonto</strong> e uscite esclusive sull'Isola di Dino e nelle insenature della costa.</p>
+        <h3 data-i18n="barca_h3">Escursioni in Barca</h3>
+        <p data-i18n="barca_p">Tour tra grotte, calette e scogli spettacolari, con possibilità di <strong>aperitivi al tramonto</strong> e uscite esclusive sull'Isola di Dino e nelle insenature della costa.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Isola+di+Dino+Praia+a+Mare" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Praia a Mare — Isola di Dino — Vedi su Maps
+          <span data-i18n="barca_loc">Praia a Mare — Isola di Dino — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Le escursioni partono dai porticcioli della Riviera. Si naviga tra le grotte marine dell'Arcomagno, i fondali di San Nicola Arcella e le calette di Praia a Mare. Disponibile anche noleggio senza skipper per chi ha patente nautica. Servizi di aperitivo al tramonto su prenotazione.</p>
+        <p data-i18n="barca_exp">Le escursioni partono dai porticcioli della Riviera. Si naviga tra le grotte marine dell'Arcomagno, i fondali di San Nicola Arcella e le calette di Praia a Mare. Disponibile anche noleggio senza skipper per chi ha patente nautica. Servizi di aperitivo al tramonto su prenotazione.</p>
         <a class="ext-link verde" href="https://www.calabria-tour.it/escursioni-in-barca-calabria/escursioni-in-barca-riviera-dei-cedri/" target="_blank">Calabria Tour</a>
         <a class="ext-link cs" href="https://calabriastraordinaria.it/esperienze/tour-in-barca-lungo-la-riviera-dei-cedri" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link verde" href="https://adhoctravel.it/escursione-alla-scoperta-della-riviera-dei-cedri-con-ad-hoc-travel-experience" target="_blank">Ad Hoc Travel</a>
@@ -481,19 +479,19 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/falcol.jpeg" alt="Esperienza con i Rapaci" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hostegi/imgriviera/main/falcol.jpg'">
-        <span class="act-tag tag-natura">Natura</span>
+        <span class="act-tag tag-natura" data-i18n="tag_natura">Natura</span>
       </div>
       <div class="act-card-body">
-        <h3>Esperienza con i Rapaci</h3>
-        <p>Un'esperienza autentica con rapaci, tra <strong>voli liberi</strong> e passeggiate nel bosco. Momenti di didattica, natura e fotografia in location suggestive della Catena Costiera. Durante la stagione estiva, su prenotazione, i pomeriggi con i rapaci vengono organizzati anche direttamente in hotel.</p>
+        <h3 data-i18n="rap_h3">Esperienza con i Rapaci</h3>
+        <p data-i18n="rap_p">Un'esperienza autentica con rapaci, tra <strong>voli liberi</strong> e passeggiate nel bosco. Momenti di didattica, natura e fotografia in location suggestive della Catena Costiera. Durante la stagione estiva, su prenotazione, i pomeriggi con i rapaci vengono organizzati anche direttamente in hotel.</p>
         <a class="location-note" href="https://www.google.com/maps/search/falconeria+Bonifati+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Bonifati (CS) — Vedi su Maps
+          <span data-i18n="rap_loc">Bonifati (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Falchi e altri rapaci presentati da falconieri esperti in ambienti naturali della Catena Costiera. L'attività include voli dimostrativi, momenti fotografici ravvicinati e la possibilità di tenere un rapace sul guanto. Adatta a bambini e famiglie. Per le date degli eventi in hotel, contattate la nostra Reception.</p>
+        <p data-i18n="rap_exp">Falchi e altri rapaci presentati da falconieri esperti in ambienti naturali della Catena Costiera. L'attività include voli dimostrativi, momenti fotografici ravvicinati e la possibilità di tenere un rapace sul guanto. Adatta a bambini e famiglie. Per le date degli eventi in hotel, contattate la nostra Reception.</p>
         <a class="ext-link" href="https://www.google.com/maps/search/rapaci+Calabria+Catena+Costiera" target="_blank" style="margin-top:12px">Google Maps</a>
       </div>
     </div>
@@ -503,32 +501,32 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 
 <!-- CULTURA -->
 <section id="cultura" class="bg-white">
-  <div class="section-label">Arte e Cultura</div>
-  <div class="section-title">Bellezza e tradizione</div>
-  <p class="section-sub">Arte di strada, concerti all'aperto, mercati locali e musei unici al mondo.</p>
+  <div class="section-label" data-i18n="cult_label">Arte e Cultura</div>
+  <div class="section-title" data-i18n="cult_title">Bellezza e tradizione</div>
+  <p class="section-sub" data-i18n="cult_sub">Arte di strada, concerti all'aperto, mercati locali e musei unici al mondo.</p>
   <div class="cards-grid">
 
     <!-- MURALES -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/muralesdiamante.jpeg" alt="Murales di Diamante">
-        <span class="act-tag tag-arte">Arte</span>
+        <span class="act-tag tag-arte" data-i18n="tag_arte">Arte</span>
       </div>
       <div class="act-card-body">
-        <h3>Murales di Diamante</h3>
-        <p>Dal 1981 Diamante è un <strong>museo a cielo aperto</strong>: oltre 300 murales colorano le vie del centro storico, tra arte, poesia e tradizione. Ogni vicolo è una sorpresa.</p>
+        <h3 data-i18n="mur_h3">Murales di Diamante</h3>
+        <p data-i18n="mur_p">Dal 1981 Diamante è un <strong>museo a cielo aperto</strong>: oltre 300 murales colorano le vie del centro storico, tra arte, poesia e tradizione. Ogni vicolo è una sorpresa.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Diamante+CS" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Diamante (CS) — Vedi su Maps
+          <span data-i18n="mur_loc">Diamante (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>I murales nascono nel 1981 con una mostra internazionale. Da allora Diamante è uno dei più importanti esempi di street art in Italia. I temi spaziano dalla storia locale al surrealismo, dall'omaggio ai pescatori alla critica sociale. Una passeggiata nel centro storico è un percorso d'arte all'aria aperta imperdibile.</p>
+        <p data-i18n="mur_exp">I murales nascono nel 1981 con una mostra internazionale. Da allora Diamante è uno dei più importanti esempi di street art in Italia. I temi spaziano dalla storia locale al surrealismo, dall'omaggio ai pescatori alla critica sociale. Una passeggiata nel centro storico è un percorso d'arte all'aria aperta imperdibile.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Diamante+CS" target="_blank">Google Maps</a>
-        <a class="ext-link verde" href="https://enricatancioni.com/2022/09/05/in-giro-per-diamante-il-borgo-dei-murales/" target="_blank">Guida ai Murales</a>
+        <a class="ext-link verde" href="https://enricatancioni.com/2022/09/05/in-giro-per-diamante-il-borgo-dei-murales/" target="_blank" data-i18n="mur_guide">Guida ai Murales</a>
         <a class="ext-link verde" href="https://siviaggia.it/borghi/murales-diamante-arte-peperoncino/213906/" target="_blank">Si Viaggia</a>
-        <span class="credits-note">Contenuti di approfondimento da <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> e <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a></span>
+        <span class="credits-note" data-i18n="mur_credits">Contenuti di approfondimento da <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> e <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a></span>
       </div>
     </div>
 
@@ -536,19 +534,19 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/rudericirella.jpeg" alt="Ruderi di Cirella">
-        <span class="act-tag tag-cultura">Cultura</span>
+        <span class="act-tag tag-cultura" data-i18n="tag_cultura">Cultura</span>
       </div>
       <div class="act-card-body">
-        <h3>Ruderi di Cirella</h3>
-        <p>Antico insediamento dal Paleolitico. Ogni estate un <strong>teatro a cielo aperto</strong> tra le mura di Cirella ospita artisti nazionali e internazionali — un'esperienza unica sotto le stelle.</p>
+        <h3 data-i18n="cir_h3">Ruderi di Cirella</h3>
+        <p data-i18n="cir_p">Antico insediamento dal Paleolitico. Ogni estate un <strong>teatro a cielo aperto</strong> tra le mura di Cirella ospita artisti nazionali e internazionali — un'esperienza unica sotto le stelle.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Cirella+Vecchia,+Diamante" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Cirella Vecchia, Diamante (CS) — Vedi su Maps
+          <span data-i18n="cir_loc">Cirella Vecchia, Diamante (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Cirella è un'antica città fantasma sulla collina sopra Diamante, con origini preistoriche. Attraverso incursioni saracene, Borboni e abbandoni, conserva ruderi del castello baronale e di antiche chiese. D'estate il festival di musica tra le rovine crea un'atmosfera senza eguali.</p>
+        <p data-i18n="cir_exp">Cirella è un'antica città fantasma sulla collina sopra Diamante, con origini preistoriche. Attraverso incursioni saracene, Borboni e abbandoni, conserva ruderi del castello baronale e di antiche chiese. D'estate il festival di musica tra le rovine crea un'atmosfera senza eguali.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Cirella+Vecchia" target="_blank">Google Maps</a>
       </div>
     </div>
@@ -557,19 +555,19 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/mercatovenerdi.jpeg" alt="Mercati Tradizionali">
-        <span class="act-tag tag-cultura">Tradizione</span>
+        <span class="act-tag tag-cultura" data-i18n="tag_tradizione">Tradizione</span>
       </div>
       <div class="act-card-body">
-        <h3>Mercati Tradizionali</h3>
-        <p>La Riviera è animata da <strong>mercati settimanali</strong> con prodotti freschi, abbigliamento e oggetti locali — quotidianità autentica da vivere.</p>
+        <h3 data-i18n="merc_h3">Mercati Tradizionali</h3>
+        <p data-i18n="merc_p">La Riviera è animata da <strong>mercati settimanali</strong> con prodotti freschi, abbigliamento e oggetti locali — quotidianità autentica da vivere.</p>
         <a class="location-note" href="https://www.google.com/maps/search/mercato+Riviera+dei+Cedri+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Riviera dei Cedri — Vedi su Maps
+          <span data-i18n="merc_loc">Riviera dei Cedri — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Lungo la Riviera ci sono mercati settimanali in diversi paesi: tra questi <strong>Cittadella del Capo</strong> il giovedì mattina, <strong>Cetraro</strong> il sabato mattina, e mercati estivi in altri comuni. Tra le bancarelle: frutta, verdura e pesce freschi, artigianato, spezie, abbigliamento. Un modo semplice e autentico per vivere la quotidianità della Riviera.</p>
+        <p data-i18n="merc_exp">Lungo la Riviera ci sono mercati settimanali in diversi paesi: tra questi <strong>Cittadella del Capo</strong> il giovedì mattina, <strong>Cetraro</strong> il sabato mattina, e mercati estivi in altri comuni. Tra le bancarelle: frutta, verdura e pesce freschi, artigianato, spezie, abbigliamento.</p>
         <a class="ext-link" href="https://www.google.com/maps/search/mercati+Calabria+costa" target="_blank">Google Maps</a>
       </div>
     </div>
@@ -578,22 +576,21 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/museoatlantide.jpeg" alt="Atlantide Museo Subacqueo">
-        <span class="act-tag tag-arte">Arte Subacquea</span>
+        <span class="act-tag tag-arte" data-i18n="tag_subacqueo">Arte Subacquea</span>
       </div>
       <div class="act-card-body">
-        <h3>Atlantide — Museo Subacqueo</h3>
-        <p>Un museo unico: le opere si ammirano <strong>sott'acqua</strong>. Tra i fondali dell'Isola di Cirella, sculture riposano tra posidonia e pesci. Accessibile con semplice snorkeling.</p>
+        <h3 data-i18n="atl_h3">Atlantide — Museo Subacqueo</h3>
+        <p data-i18n="atl_p">Un museo unico: le opere si ammirano <strong>sott'acqua</strong>. Tra i fondali dell'Isola di Cirella, sculture riposano tra posidonia e pesci. Accessibile con semplice snorkeling.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Isola+di+Cirella+Diamante" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Isola di Cirella, Diamante (CS) — Vedi su Maps
+          <span data-i18n="atl_loc">Isola di Cirella, Diamante (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Le sculture di Francesco Minuti sono diventate parte dell'ecosistema marino: pesci, polipi e alghe le abitano quotidianamente. Per raggiungerle bastano maschera e pinne, a pochi metri dalla riva dell'Isola di Cirella. Un'esperienza tra arte, natura e silenzio sommerso.</p>
+        <p data-i18n="atl_exp">Le sculture di Francesco Minuti sono diventate parte dell'ecosistema marino: pesci, polipi e alghe le abitano quotidianamente. Per raggiungerle bastano maschera e pinne, a pochi metri dalla riva dell'Isola di Cirella. Un'esperienza tra arte, natura e silenzio sommerso.</p>
         <a class="ext-link cs" href="https://calabriastraordinaria.it/idee-di-viaggio/atlantide-il-museo-subacqueo-dellisola-di-cirella" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Isola+Cirella+museo+subacqueo" target="_blank">Google Maps</a>
-        <span class="credits-note">Approfondimento a cura di <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a></span>
       </div>
     </div>
 
@@ -602,31 +599,31 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 
 <!-- NATURA -->
 <section id="natura" class="bg-celeste">
-  <div class="section-label">Natura</div>
-  <div class="section-title">Meraviglie naturali</div>
-  <p class="section-sub">Cascate nascoste, archi scolpiti dal mare, gole selvagge e sentieri tra boschi ancora intatti.</p>
+  <div class="section-label" data-i18n="nat_label">Natura</div>
+  <div class="section-title" data-i18n="nat_title">Meraviglie naturali</div>
+  <p class="section-sub" data-i18n="nat_sub">Cascate nascoste, archi scolpiti dal mare, gole selvagge e sentieri tra boschi ancora intatti.</p>
   <div class="cards-grid">
 
     <!-- CASCATA DEL VUGLIO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/cascatavuglio.jpeg" alt="Cascata del Vuglio">
-        <span class="act-tag tag-natura">Natura</span>
+        <span class="act-tag tag-natura" data-i18n="tag_natura">Natura</span>
       </div>
       <div class="act-card-body">
-        <h3>Cascata del Vuglio</h3>
-        <p>Immersa in un <strong>paesaggio incontaminato</strong> nel comune di Sangineto, la Cascata del Vuglio è raggiungibile con una breve passeggiata tra felci e liane. E ha persino fatto da set cinematografico!</p>
+        <h3 data-i18n="casc_h3">Cascata del Vuglio</h3>
+        <p data-i18n="casc_p">Immersa in un <strong>paesaggio incontaminato</strong> nel comune di Sangineto, la Cascata del Vuglio è raggiungibile con una breve passeggiata tra felci e liane. E ha persino fatto da set cinematografico!</p>
         <a class="location-note" href="https://www.google.com/maps/search/Cascata+del+Vuglio+Sangineto" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Sangineto (CS) — Vedi su Maps
+          <span data-i18n="casc_loc">Sangineto (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Riscoperta e valorizzata da un gruppo di volontari locali, la Cascata del Vuglio si trova nel comune di Sangineto. Immersa in una gola rocciosa di vegetazione fitta, è ideale per una pausa fresca nelle calde giornate estive.</p>
-        <p><strong>Prenotazione obbligatoria:</strong> chiamare il <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> ore 10:00–13:00 e 14:30–17:30.</p>
-        <p><strong>Set cinematografico:</strong> Sangineto ha ospitato le riprese del film <em>"La Voce di Cupido"</em>, commedia romantica diretta da Ago Panini, cofinanziata dalla Calabria Film Commission, andata in onda su Rai nel dicembre 2025.</p>
-        <a class="ext-link verde" href="https://www.cascatadelvuglio.it" target="_blank">Sito Ufficiale</a>
+        <p data-i18n="casc_exp1">Riscoperta e valorizzata da un gruppo di volontari locali, la Cascata del Vuglio si trova nel comune di Sangineto. Immersa in una gola rocciosa di vegetazione fitta, è ideale per una pausa fresca nelle calde giornate estive.</p>
+        <p data-i18n="casc_exp2"><strong>Prenotazione obbligatoria:</strong> chiamare il <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> ore 10:00–13:00 e 14:30–17:30.</p>
+        <p data-i18n="casc_exp3"><strong>Set cinematografico:</strong> Sangineto ha ospitato le riprese del film <em>"La Voce di Cupido"</em>, commedia romantica diretta da Ago Panini, cofinanziata dalla Calabria Film Commission, andata in onda su Rai nel dicembre 2025.</p>
+        <a class="ext-link verde" href="https://www.cascatadelvuglio.it" target="_blank" data-i18n="official_site">Sito Ufficiale</a>
         <a class="ext-link verde" href="https://www.inrivieradeicedri.it/sangineto-cascata-del-vuglio.html" target="_blank">In Riviera dei Cedri</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Cascata+Vuglio+Sangineto" target="_blank">Google Maps</a>
       </div>
@@ -636,23 +633,22 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/arcomagno.jpeg" alt="Arcomagno">
-        <span class="act-tag tag-natura">Natura</span>
+        <span class="act-tag tag-natura" data-i18n="tag_natura">Natura</span>
       </div>
       <div class="act-card-body">
         <h3>Arcomagno</h3>
-        <p>Un maestoso <strong>arco naturale</strong> scolpito dal mare che custodisce una laguna a mezzaluna segreta — la Grotta del Saraceno. Uno dei luoghi più belli della Calabria.</p>
+        <p data-i18n="arco_p">Un maestoso <strong>arco naturale</strong> scolpito dal mare che custodisce una laguna a mezzaluna segreta — la Grotta del Saraceno. Uno dei luoghi più belli della Calabria.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Arcomagno,+San+Nicola+Arcella" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          San Nicola Arcella (CS) — Vedi su Maps
+          <span data-i18n="arco_loc">San Nicola Arcella (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>L'arco naturale, alto decine di metri, incornicia una piccola spiaggia di ciottoli bianchi e un'acqua turchese intenso. Vi si accede a piedi tramite sentiero dalla spiaggia di San Nicola Arcella, oppure in barca. Al tramonto lo spettacolo è straordinario.</p>
+        <p data-i18n="arco_exp">L'arco naturale, alto decine di metri, incornicia una piccola spiaggia di ciottoli bianchi e un'acqua turchese intenso. Vi si accede a piedi tramite sentiero dalla spiaggia di San Nicola Arcella, oppure in barca. Al tramonto lo spettacolo è straordinario.</p>
         <a class="ext-link verde" href="https://www.arcomagnocalabria.it" target="_blank">Arcomagno.it</a>
         <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/arcomagno-san-nicola-arcella" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link" href="https://www.google.com/maps/place/Arcomagno" target="_blank">Google Maps</a>
-        <span class="credits-note">Approfondimento da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a></span>
       </div>
     </div>
 
@@ -660,20 +656,20 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/camminosanfrancesco.jpeg" alt="Cammino di San Francesco">
-        <span class="act-tag tag-trekking">Trekking</span>
+        <span class="act-tag tag-trekking" data-i18n="tag_trekking">Trekking</span>
       </div>
       <div class="act-card-body">
-        <h3>Cammino di San Francesco</h3>
-        <p>Un percorso di <strong>112 km in 6 tappe</strong> attraverso la Catena Costiera calabrese, tra borghi, boschi di faggio e scorci panoramici sul mare. Sulle orme del patrono della Calabria.</p>
+        <h3 data-i18n="camm_h3">Cammino di San Francesco</h3>
+        <p data-i18n="camm_p">Un percorso di <strong>112 km in 6 tappe</strong> attraverso la Catena Costiera calabrese, tra borghi, boschi di faggio e scorci panoramici sul mare. Sulle orme del patrono della Calabria.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Cammino+San+Francesco+Calabria" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Catena Costiera, Calabria — Vedi su Maps
+          <span data-i18n="camm_loc">Catena Costiera, Calabria — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Da San Marco Argentano fino al Santuario di Paternò Calabro, con tappe intermedie a Paola. Per esperienze più brevi: la Via del Giovane e la Via dell'Eremita. Periodo ideale: primavera e autunno. Lungo il percorso, borghi, eremi e punti panoramici sul Tirreno.</p>
-        <a class="ext-link verde" href="https://www.ilcamminodisanfrancesco.it" target="_blank">Sito Ufficiale</a>
+        <p data-i18n="camm_exp">Da San Marco Argentano fino al Santuario di Paternò Calabro, con tappe intermedie a Paola. Per esperienze più brevi: la Via del Giovane e la Via dell'Eremita. Periodo ideale: primavera e autunno. Lungo il percorso, borghi, eremi e punti panoramici sul Tirreno.</p>
+        <a class="ext-link verde" href="https://www.ilcamminodisanfrancesco.it" target="_blank" data-i18n="official_site">Sito Ufficiale</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Cammino+San+Francesco+Calabria" target="_blank">Google Maps</a>
       </div>
     </div>
@@ -689,30 +685,30 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 
 <!-- STORIA -->
 <section id="storia" class="bg-lilla">
-  <div class="section-label">Archeologia e Storia</div>
-  <div class="section-title">La storia che ci circonda</div>
-  <p class="section-sub">Dalla preistoria alla Magna Grecia, musei e siti che raccontano millenni di civiltà.</p>
+  <div class="section-label" data-i18n="stor_label">Archeologia e Storia</div>
+  <div class="section-title" data-i18n="stor_title">La storia che ci circonda</div>
+  <p class="section-sub" data-i18n="stor_sub">Dalla preistoria alla Magna Grecia, musei e siti che raccontano millenni di civiltà.</p>
   <div class="cards-grid">
 
     <!-- GROTTA DEL ROMITO -->
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/grottaromito.jpeg" alt="Grotta del Romito">
-        <span class="act-tag tag-storia">Preistoria</span>
+        <span class="act-tag tag-storia" data-i18n="tag_preistoria">Preistoria</span>
       </div>
       <div class="act-card-body">
-        <h3>Grotta del Romito</h3>
-        <p>Una delle più antiche testimonianze di arte preistorica in Europa: graffito di un bovide <strong>scolpito oltre 12.000 anni fa</strong>. Visitabile con passerelle e visite guidate.</p>
+        <h3 data-i18n="rom_h3">Grotta del Romito</h3>
+        <p data-i18n="rom_p">Una delle più antiche testimonianze di arte preistorica in Europa: graffito di un bovide <strong>scolpito oltre 12.000 anni fa</strong>. Visitabile con passerelle e visite guidate.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Grotta+del+Romito,+Papasidero" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Papasidero (CS) — Vedi su Maps
+          <span data-i18n="rom_loc">Papasidero (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il bovide inciso nella roccia risale a circa 12.000 anni fa ed è uno dei più grandi e meglio conservati esempi di arte rupestre italiana. Il sito include anche sepolture e reperti dell'Homo sapiens nel Paleolitico. Accessibile tramite passerelle con visita guidata.</p>
+        <p data-i18n="rom_exp">Il bovide inciso nella roccia risale a circa 12.000 anni fa ed è uno dei più grandi e meglio conservati esempi di arte rupestre italiana. Il sito include anche sepolture e reperti dell'Homo sapiens nel Paleolitico. Accessibile tramite passerelle con visita guidata.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Grotta+del+Romito" target="_blank">Google Maps</a>
-        <a class="ext-link verde" href="https://it.wikipedia.org/wiki/Grotta_del_Romito" target="_blank">Approfondisci</a>
+        <a class="ext-link verde" href="https://it.wikipedia.org/wiki/Grotta_del_Romito" target="_blank" data-i18n="learn_more">Approfondisci</a>
       </div>
     </div>
 
@@ -720,23 +716,22 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/parcoarcheologicolaos.jpeg" alt="Parco Laos">
-        <span class="act-tag tag-storia">Magna Grecia</span>
+        <span class="act-tag tag-storia" data-i18n="tag_magnagrecia">Magna Grecia</span>
       </div>
       <div class="act-card-body">
-        <h3>Parco Archeologico di Laos</h3>
-        <p>Sorta dopo Sibari, Laos conserva resti di <strong>mura difensive, abitazioni e aree artigianali</strong> — raro esempio di urbanistica greca affacciata sul mare, abbandonata nel III sec. a.C.</p>
+        <h3 data-i18n="laos_h3">Parco Archeologico di Laos</h3>
+        <p data-i18n="laos_p">Sorta dopo Sibari, Laos conserva resti di <strong>mura difensive, abitazioni e aree artigianali</strong> — raro esempio di urbanistica greca affacciata sul mare, abbandonata nel III sec. a.C.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Parco+Laos+Santa+Maria+del+Cedro" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Santa Maria del Cedro (CS) — Vedi su Maps
+          <span data-i18n="laos_loc">Santa Maria del Cedro (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Fondata nel VI sec. a.C. da coloni greci provenienti da Sibari. Il sito ospita la "Casa con la Rampa" e la "Casa col Mosaico". Il contesto paesaggistico, tra vigneti e mare, lo rende straordinario. Parco aperto al pubblico.</p>
+        <p data-i18n="laos_exp">Fondata nel VI sec. a.C. da coloni greci provenienti da Sibari. Il sito ospita la "Casa con la Rampa" e la "Casa col Mosaico". Il contesto paesaggistico, tra vigneti e mare, lo rende straordinario. Parco aperto al pubblico.</p>
         <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/parco-archeologico-di-laos-santa-maria-del-cedro" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link verde" href="https://www.sitiarcheologiciditalia.it/laos-antica-citta-greca/" target="_blank">Siti Archeologici d'Italia</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Parco+Laos" target="_blank">Google Maps</a>
-        <span class="credits-note">Approfondimento da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> e <a href="https://www.sitiarcheologiciditalia.it" target="_blank">Siti Archeologici d'Italia</a></span>
       </div>
     </div>
 
@@ -744,22 +739,21 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/museodeibretti.jpeg" alt="Museo Bretti">
-        <span class="act-tag tag-storia">Museo</span>
+        <span class="act-tag tag-storia" data-i18n="tag_museo">Museo</span>
       </div>
       <div class="act-card-body">
-        <h3>Museo dei Brettii e del Mare</h3>
-        <p>Racconta la storia del territorio tra IV e III sec. a.C. Da non perdere la sezione marina con <strong>anfore rinvenute lungo la costa</strong> e la collezione cartografica Losardo.</p>
+        <h3 data-i18n="bret_h3">Museo dei Brettii e del Mare</h3>
+        <p data-i18n="bret_p">Racconta la storia del territorio tra IV e III sec. a.C. Da non perdere la sezione marina con <strong>anfore rinvenute lungo la costa</strong> e la collezione cartografica Losardo.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Museo+dei+Bretti+Cetraro" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Cetraro (CS) — Vedi su Maps
+          <span data-i18n="bret_loc">Cetraro (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Allestito con criterio didattico, racconta il popolo dei Brettii e il territorio costiero. Ospita anfore, ancore e reperti pescati lungo tutta la Riviera, oltre alla preziosa collezione cartografica donata dal professor Raffaello Losardo.</p>
+        <p data-i18n="bret_exp">Allestito con criterio didattico, racconta il popolo dei Brettii e il territorio costiero. Ospita anfore, ancore e reperti pescati lungo tutta la Riviera, oltre alla preziosa collezione cartografica donata dal professor Raffaello Losardo.</p>
         <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/museo-dei-brettii-e-del-mare-cetraro" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link" href="https://www.google.com/maps/search/Museo+Bretti+Mare+Cetraro" target="_blank">Google Maps</a>
-        <span class="credits-note">Approfondimento da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a></span>
       </div>
     </div>
 
@@ -767,25 +761,24 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/castellodelprincipe.jpeg" alt="Castello del Principe">
-        <span class="act-tag tag-storia">Medioevo</span>
+        <span class="act-tag tag-storia" data-i18n="tag_medioevo">Medioevo</span>
       </div>
       <div class="act-card-body">
-        <h3>Castello del Principe</h3>
-        <p>Il <strong>Castello di Sangineto</strong> del XV secolo — quattro torri cilindriche, mura merlate, costruito dai Sanseverino di Bisignano. Luogo del cuore FAI, ancora oggi vivo e attivo.</p>
+        <h3 data-i18n="cast_h3">Castello del Principe</h3>
+        <p data-i18n="cast_p">Il <strong>Castello di Sangineto</strong> del XV secolo — quattro torri cilindriche, mura merlate, costruito dai Sanseverino di Bisignano. Luogo del cuore FAI, ancora oggi vivo e attivo.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Castello+di+Sangineto" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Sangineto (CS) — Vedi su Maps
+          <span data-i18n="cast_loc">Sangineto (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Affacciato sulla foce del fiume, il Castello di Sangineto è una fortezza del XV secolo edificata dai Sanseverino di Bisignano. Caratterizzato da quattro torri cilindriche in pietra locale e un ampio cortile interno, ha ospitato le famiglie Majorana e Firrao, fungendo da carcere durante la Prima Guerra Mondiale. Oggi è un luogo del cuore FAI e una suggestiva location per eventi.</p>
-        <p>Durante tutto l'anno il Castello organizza <strong>giornate culturali, mercatini di Natale</strong> nel periodo natalizio e altre attività per la comunità. D'estate, per qualche serata speciale, si trasforma in discoteca tra le mura medievali.</p>
+        <p data-i18n="cast_exp1">Affacciato sulla foce del fiume, il Castello di Sangineto è una fortezza del XV secolo edificata dai Sanseverino di Bisignano. Caratterizzato da quattro torri cilindriche in pietra locale e un ampio cortile interno, ha ospitato le famiglie Majorana e Firrao, fungendo da carcere durante la Prima Guerra Mondiale. Oggi è un luogo del cuore FAI e una suggestiva location per eventi.</p>
+        <p data-i18n="cast_exp2">Durante tutto l'anno il Castello organizza <strong>giornate culturali, mercatini di Natale</strong> nel periodo natalizio e altre attività per la comunità. D'estate, per qualche serata speciale, si trasforma in discoteca tra le mura medievali.</p>
         <a class="ext-link cs" href="https://calabriastraordinaria.it/luoghi/castello-del-principe-sangineto" target="_blank">Calabria Straordinaria</a>
         <a class="ext-link verde" href="https://www.dimorestoricheitaliane.it/strutture/castello-del-principe/" target="_blank">Dimore Storiche Italiane</a>
         <a class="ext-link ig" href="https://www.instagram.com/castellodelprincipe" target="_blank">Instagram</a>
         <a class="ext-link" href="https://www.google.com/maps/place/Castello+Sangineto" target="_blank">Google Maps</a>
-        <span class="credits-note">Informazioni da <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> e <a href="https://www.dimorestoricheitaliane.it" target="_blank">Dimore Storiche Italiane</a></span>
       </div>
     </div>
 
@@ -794,48 +787,48 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 
 <!-- LUOGHI SACRI -->
 <section id="sacri" class="bg-white">
-  <div class="section-label">Spiritualità</div>
-  <div class="section-title">Luoghi sacri</div>
-  <p class="section-sub">Fede, arte e spiritualità in luoghi che emozionano l'anima e raccontano secoli di devozione.</p>
+  <div class="section-label" data-i18n="sacri_label">Spiritualità</div>
+  <div class="section-title" data-i18n="sacri_title">Luoghi sacri</div>
+  <p class="section-sub" data-i18n="sacri_sub">Fede, arte e spiritualità in luoghi che emozionano l'anima e raccontano secoli di devozione.</p>
   <div class="cards-grid">
 
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/santuariosanfranc.jpg" alt="Santuario di San Francesco di Paola">
-        <span class="act-tag tag-spirituale">Pellegrinaggio</span>
+        <span class="act-tag tag-spirituale" data-i18n="tag_pellegrinaggio">Pellegrinaggio</span>
       </div>
       <div class="act-card-body">
-        <h3>Santuario di San Francesco di Paola</h3>
-        <p>Tra i più importanti luoghi di pellegrinaggio del Sud Italia, dedicato al <strong>patrono della Calabria</strong>. Dalla basilica moderna alla "Fonte della Cucchiarella" fino all'eremo.</p>
+        <h3 data-i18n="sanf_h3">Santuario di San Francesco di Paola</h3>
+        <p data-i18n="sanf_p">Tra i più importanti luoghi di pellegrinaggio del Sud Italia, dedicato al <strong>patrono della Calabria</strong>. Dalla basilica moderna alla "Fonte della Cucchiarella" fino all'eremo.</p>
         <a class="location-note" href="https://www.google.com/maps/place/Santuario+di+San+Francesco+di+Paola" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Paola (CS) — Vedi su Maps
+          <span data-i18n="sanf_loc">Paola (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il complesso comprende la basilica moderna, la basilica antica con le reliquie del santo, l'eremo dove San Francesco visse in solitudine e la suggestiva Fonte della Cucchiarella. Centinaia di migliaia di pellegrini ogni anno. Un luogo di fede, arte e storia profonda.</p>
+        <p data-i18n="sanf_exp">Il complesso comprende la basilica moderna, la basilica antica con le reliquie del santo, l'eremo dove San Francesco visse in solitudine e la suggestiva Fonte della Cucchiarella. Centinaia di migliaia di pellegrini ogni anno. Un luogo di fede, arte e storia profonda.</p>
         <a class="ext-link" href="https://www.google.com/maps/place/Santuario+San+Francesco+Paola" target="_blank">Google Maps</a>
-        <a class="ext-link verde" href="https://www.santuariopaola.it" target="_blank">Sito Ufficiale</a>
+        <a class="ext-link verde" href="https://www.santuariopaola.it" target="_blank" data-i18n="official_site">Sito Ufficiale</a>
       </div>
     </div>
 
     <div class="act-card reveal" onclick="togglePanel(this)">
       <div class="act-card-img">
         <img src="https://raw.githubusercontent.com/hostegi/imgriviera/main/conventosanvalentino.jpeg" alt="Convento dei Cappuccini">
-        <span class="act-tag tag-spirituale">Romantico</span>
+        <span class="act-tag tag-spirituale" data-i18n="tag_romantico">Romantico</span>
       </div>
       <div class="act-card-body">
-        <h3>Convento dei Cappuccini</h3>
-        <p>Belvedere Marittimo è il <strong>"borgo degli innamorati"</strong>: nel convento del 1595 sono custodite le reliquie di San Valentino. Il 14 febbraio coppie da tutta Italia si ritrovano qui.</p>
+        <h3 data-i18n="conv_h3">Convento dei Cappuccini</h3>
+        <p data-i18n="conv_p">Belvedere Marittimo è il <strong>"borgo degli innamorati"</strong>: nel convento del 1595 sono custodite le reliquie di San Valentino. Il 14 febbraio coppie da tutta Italia si ritrovano qui.</p>
         <a class="location-note" href="https://www.google.com/maps/search/Convento+Cappuccini+Belvedere+Marittimo" target="_blank" onclick="event.stopPropagation()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Belvedere Marittimo (CS) — Vedi su Maps
+          <span data-i18n="conv_loc">Belvedere Marittimo (CS) — Vedi su Maps</span>
         </a>
       </div>
-      <button class="expand-btn">Scopri di più</button>
+      <button class="expand-btn" data-i18n="btn_more">Scopri di più</button>
       <div class="expand-panel">
-        <p>Il convento conserva altari barocchi, affreschi mariani e opere d'arte sacra. Le reliquie di San Valentino lo rendono meta di pellegrinaggio romantico unica in Italia. Belvedere Marittimo, con il suo centro storico medievale e la vista sul mare, è uno dei borghi più affascinanti della Riviera.</p>
+        <p data-i18n="conv_exp">Il convento conserva altari barocchi, affreschi mariani e opere d'arte sacra. Le reliquie di San Valentino lo rendono meta di pellegrinaggio romantico unica in Italia. Belvedere Marittimo, con il suo centro storico medievale e la vista sul mare, è uno dei borghi più affascinanti della Riviera.</p>
         <a class="ext-link" href="https://www.google.com/maps/search/Convento+Cappuccini+Belvedere+Marittimo" target="_blank">Google Maps</a>
       </div>
     </div>
@@ -851,13 +844,13 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 
 <!-- COME MUOVERSI -->
 <section id="muoversi">
-  <div class="section-label">Mobilità</div>
-  <div class="section-title">Come muoversi?</div>
-  <p class="section-sub">La Riviera dei Cedri è ben collegata. Clicca sulle stazioni per vederle su Maps, o acquista i biglietti direttamente su Trenitalia.</p>
+  <div class="section-label" data-i18n="muov_label">Mobilità</div>
+  <div class="section-title" data-i18n="muov_title">Come muoversi?</div>
+  <p class="section-sub" data-i18n="muov_sub">La Riviera dei Cedri è ben collegata. Clicca sulle stazioni per vederle su Maps, o acquista i biglietti direttamente su Trenitalia.</p>
   <div class="transport-grid">
 
     <div class="transport-box reveal">
-      <h4>Stazioni della Riviera</h4>
+      <h4 data-i18n="stations_title">Stazioni della Riviera</h4>
       <ul class="station-list">
         <li class="station-item"><span class="station-name">Praja · Ajeta · Tortora</span><span class="station-btns"><a class="btn-maps" href="https://www.google.com/maps/search/Stazione+Praia+a+Mare" target="_blank">Maps</a><a class="btn-treni" href="https://www.trenitalia.com/it/informazioni/Acquista_online.html" target="_blank">Biglietti</a></span></li>
         <li class="station-item"><span class="station-name">Scalea · S. Domenica Talao</span><span class="station-btns"><a class="btn-maps" href="https://www.google.com/maps/search/Stazione+Scalea" target="_blank">Maps</a><a class="btn-treni" href="https://www.trenitalia.com/it/informazioni/Acquista_online.html" target="_blank">Biglietti</a></span></li>
@@ -876,13 +869,13 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 
     <div>
       <div class="transport-box reveal">
-        <h4>Servizio Transfer</h4>
+        <h4 data-i18n="transfer_title">Servizio Transfer</h4>
         <div class="transfer-box">
-          <p>Per transfer da stazioni e aeroporti, rivolgersi alla <strong>Reception dell'Hotel</strong>. Organizziamo escursioni personalizzate e consigliamo i migliori itinerari.</p>
+          <p data-i18n="transfer_text">Per transfer da stazioni e aeroporti, rivolgersi alla <strong>Reception dell'Hotel</strong>. Organizziamo escursioni personalizzate e consigliamo i migliori itinerari.</p>
         </div>
       </div>
       <div class="transport-box reveal" style="margin-top:20px;">
-        <h4>Aeroporti vicini</h4>
+        <h4 data-i18n="airports_title">Aeroporti vicini</h4>
         <ul class="station-list">
           <li class="station-item"><span class="station-name">Lamezia Terme (ca. 90 min)</span><span class="station-btns"><a class="btn-maps" href="https://www.google.com/maps/place/Aeroporto+Lamezia+Terme" target="_blank">Maps</a></span></li>
           <li class="station-item"><span class="station-name">Napoli Capodichino (ca. 2h30)</span><span class="station-btns"><a class="btn-maps" href="https://www.google.com/maps/place/Aeroporto+Napoli" target="_blank">Maps</a></span></li>
@@ -890,7 +883,7 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
         </ul>
       </div>
       <div class="transport-box reveal" style="margin-top:20px;">
-        <h4>Link utili</h4>
+        <h4 data-i18n="useful_links">Link utili</h4>
         <a class="util-link" href="https://www.trenitalia.com" target="_blank">Trenitalia — Acquista biglietti online</a>
         <a class="util-link" href="https://www.google.com/maps/search/Riviera+dei+Cedri" target="_blank">Google Maps — Riviera dei Cedri</a>
         <a class="util-link" href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria — Turismo Calabria</a>
@@ -903,7 +896,7 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
 <!-- CALABRIA STRAORDINARIA BANNER -->
 <div class="cs-banner">
   <img src="https://calabriastraordinaria.it/images/logo-calabria-straordinaria.svg" alt="Calabria Straordinaria" onerror="this.style.display='none'">
-  <div class="cs-banner-text">Scopri la Calabria con <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — il portale ufficiale del turismo calabrese</div>
+  <div class="cs-banner-text" data-i18n="cs_banner">Scopri la Calabria con <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — il portale ufficiale del turismo calabrese</div>
 </div>
 
 <!-- FOOTER -->
@@ -917,9 +910,9 @@ footer{background:var(--testo);color:white;padding:44px 40px 32px;display:flex;f
       <h3>Hotel delle Stelle</h3>
       <p>Beach Resort · Riviera dei Cedri, Calabria</p>
     </div>
-    <div class="footer-tagline">Visite · Escursioni · Esperienze · Mobilità<br><em>La tua avventura inizia qui.</em></div>
+    <div class="footer-tagline" data-i18n="footer_tagline">Visite · Escursioni · Esperienze · Mobilità<br><em>La tua avventura inizia qui.</em></div>
     <div class="footer-contact">
-      <p>Per informazioni ed escursioni:</p>
+      <p data-i18n="footer_info">Per informazioni ed escursioni:</p>
       <p><strong>Reception Hotel delle Stelle</strong></p>
       <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.3);">Contenuti a cura di Hotel delle Stelle Beach Resort</p>
     </div>
@@ -966,13 +959,16 @@ function togglePanel(card) {
   const panel = card.querySelector('.expand-panel');
   const btn = card.querySelector('.expand-btn');
   if (!panel) return;
+  const currentLang = document.documentElement.lang || 'it';
+  const openLabels = {it:'Scopri di più', en:'Find out more', de:'Mehr erfahren', fr:'En savoir plus'};
+  const closeLabels = {it:'Chiudi', en:'Close', de:'Schließen', fr:'Fermer'};
   const isOpen = panel.classList.contains('open');
   document.querySelectorAll('.expand-panel.open').forEach(p => {
     p.classList.remove('open');
     const b = p.closest('.act-card').querySelector('.expand-btn');
-    if (b) b.textContent = 'Scopri di più';
+    if (b) b.textContent = openLabels[currentLang] || 'Scopri di più';
   });
-  if (!isOpen) { panel.classList.add('open'); btn.textContent = 'Chiudi'; }
+  if (!isOpen) { panel.classList.add('open'); btn.textContent = closeLabels[currentLang] || 'Chiudi'; }
 }
 
 // Animated counters
@@ -1022,22 +1018,419 @@ function scrollTo(selector) {
 }
 updateSideNav();
 
-// Hamburger drawer
-function toggleDrawer() {
-  const drawer = document.getElementById('navDrawer');
-  const overlay = document.getElementById('navOverlay');
-  const btn = document.getElementById('hamburger');
-  if(drawer) drawer.classList.toggle('open');
-  if(overlay) overlay.classList.toggle('show');
-  if(btn) btn.classList.toggle('open');
-}
-function closeDrawer() {
-  const drawer = document.getElementById('navDrawer');
-  const overlay = document.getElementById('navOverlay');
-  const btn = document.getElementById('hamburger');
-  if(drawer) drawer.classList.remove('open');
-  if(overlay) overlay.classList.remove('show');
-  if(btn) btn.classList.remove('open');
+// ===== TRADUZIONI =====
+const translations = {
+  it: {
+    hero_tag: 'Riviera dei Cedri · Calabria',
+    hero_h1: 'Bellezze<br>intorno<br>a noi',
+    hero_h2: 'In giro per la Riviera dei Cedri',
+    hero_p: 'Un territorio autentico, ricco di storia, natura e tradizioni, che affascina con i suoi paesaggi vari e la bellezza ancora intatta. Un invito a scoprire una Calabria diversa, tra mare, cultura e silenzi che parlano.',
+    badge1:'Mare cristallino', badge2:'Montagne verdi', badge3:'Storia millenaria', badge4:'Esperienze uniche',
+    scroll_hint: 'Scopri',
+    strip_kw: 'Visite · Escursioni · Esperienze · Mobilità',
+    strip_sub: 'Scopri tutto quello che puoi fare durante il tuo soggiorno',
+    visitare_label:'Il Territorio', visitare_title:'Cosa visitare?',
+    visitare_sub:'Un intreccio di paesi affacciati sul mare e piccoli borghi tra colline e montagne. Un territorio ricco di colori, sapori e storie da scoprire.',
+    coast_label:'Costa — 15 località balneari', inland_label:'Entroterra — Borghi da scoprire',
+    maps_btn:'Esplora la Riviera su Google Maps',
+    big_quote:'"Tra il <span>blu del mare</span> e il <span>verde delle montagne</span>,<br>ogni giorno qui è un\'esperienza nuova."',
+    esp_label:'Avventura e Sport', esp_title:'Esperienze continue',
+    esp_sub:'Dal cielo alle acque del Lao, la Riviera dei Cedri offre emozioni per tutti i gusti.',
+    cult_label:'Arte e Cultura', cult_title:'Bellezza e tradizione',
+    cult_sub:'Arte di strada, concerti all\'aperto, mercati locali e musei unici al mondo.',
+    nat_label:'Natura', nat_title:'Meraviglie naturali',
+    nat_sub:'Cascate nascoste, archi scolpiti dal mare, gole selvagge e sentieri tra boschi ancora intatti.',
+    stor_label:'Archeologia e Storia', stor_title:'La storia che ci circonda',
+    stor_sub:'Dalla preistoria alla Magna Grecia, musei e siti che raccontano millenni di civiltà.',
+    sacri_label:'Spiritualità', sacri_title:'Luoghi sacri',
+    sacri_sub:'Fede, arte e spiritualità in luoghi che emozionano l\'anima e raccontano secoli di devozione.',
+    muov_label:'Mobilità', muov_title:'Come muoversi?',
+    muov_sub:'La Riviera dei Cedri è ben collegata. Clicca sulle stazioni per vederle su Maps, o acquista i biglietti direttamente su Trenitalia.',
+    footer_tagline:'Visite · Escursioni · Esperienze · Mobilità<br><em>La tua avventura inizia qui.</em>',
+    footer_info:'Per informazioni ed escursioni:',
+    // Tags
+    tag_avventura:'Avventura', tag_mare:'Mare', tag_natura:'Natura', tag_arte:'Arte',
+    tag_cultura:'Cultura', tag_tradizione:'Tradizione', tag_subacqueo:'Arte Subacquea',
+    tag_trekking:'Trekking', tag_preistoria:'Preistoria', tag_magnagrecia:'Magna Grecia',
+    tag_museo:'Museo', tag_medioevo:'Medioevo', tag_pellegrinaggio:'Pellegrinaggio', tag_romantico:'Romantico',
+    btn_more:'Scopri di più', official_site:'Sito Ufficiale', learn_more:'Approfondisci', reviews_ta:'Recensioni TripAdvisor',
+    // Parapendio
+    para_h3:'Parapendio', para_p:'Un\'esperienza mozzafiato: si decolla da <strong>600 metri di quota</strong> per un volo panoramico di 15–20 minuti, sorvolando paesaggi spettacolari tra mare e montagne. Istruttori abilitati inclusi.',
+    para_loc:'Praia a Mare (CS) — Vedi su Maps', para_book:'Prenota: 333 664 3336',
+    para_exp1:'Il volo in biposto (tandem) con istruttore è il modo più semplice per volare, senza esperienza pregressa. Si parte da Praia a Mare con il pulmino 4x4 della scuola fino alla zona di decollo, per poi atterrare dolcemente in spiaggia. Vista unica sull\'Isola di Dino. Voli disponibili tutti i giorni 10:00–18:00 (estate) e 11:00–15:00 (inverno).',
+    para_exp2:'Gestito dalla <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.',
+    // Rafting
+    raft_h3:'Rafting Fiume Lao', raft_loc:'Papasidero (CS) — Vedi su Maps',
+    raft_p:'Tra le gole selvagge del Parco del Pollino, il <strong>fiume Lao</strong> offre rafting unico in Calabria. Oltre <strong>30 km navigabili</strong>, istruttori certificati, adatto anche ai principianti.',
+    raft_exp:'Il Lao scorre tra pareti rocciose alte anche 200 metri. I tratti sono diversificati per difficoltà: ideali per famiglie, coppie e gruppi. Stagione migliore: aprile–settembre. I centri di rafting offrono attrezzatura completa e guide esperte del Parco Nazionale del Pollino.',
+    // Barca
+    barca_h3:'Escursioni in Barca', barca_loc:'Praia a Mare — Isola di Dino — Vedi su Maps',
+    barca_p:'Tour tra grotte, calette e scogli spettacolari, con possibilità di <strong>aperitivi al tramonto</strong> e uscite esclusive sull\'Isola di Dino e nelle insenature della costa.',
+    barca_exp:'Le escursioni partono dai porticcioli della Riviera. Si naviga tra le grotte marine dell\'Arcomagno, i fondali di San Nicola Arcella e le calette di Praia a Mare. Disponibile anche noleggio senza skipper per chi ha patente nautica. Servizi di aperitivo al tramonto su prenotazione.',
+    // Rapaci
+    rap_h3:'Esperienza con i Rapaci', rap_loc:'Bonifati (CS) — Vedi su Maps',
+    rap_p:'Un\'esperienza autentica con rapaci, tra <strong>voli liberi</strong> e passeggiate nel bosco. Momenti di didattica, natura e fotografia in location suggestive della Catena Costiera. Durante la stagione estiva, su prenotazione, i pomeriggi con i rapaci vengono organizzati anche direttamente in hotel.',
+    rap_exp:'Falchi e altri rapaci presentati da falconieri esperti in ambienti naturali della Catena Costiera. L\'attività include voli dimostrativi, momenti fotografici ravvicinati e la possibilità di tenere un rapace sul guanto. Adatta a bambini e famiglie. Per le date degli eventi in hotel, contattate la nostra Reception.',
+    // Murales
+    mur_h3:'Murales di Diamante', mur_loc:'Diamante (CS) — Vedi su Maps',
+    mur_p:'Dal 1981 Diamante è un <strong>museo a cielo aperto</strong>: oltre 300 murales colorano le vie del centro storico, tra arte, poesia e tradizione. Ogni vicolo è una sorpresa.',
+    mur_exp:'I murales nascono nel 1981 con una mostra internazionale. Da allora Diamante è uno dei più importanti esempi di street art in Italia. I temi spaziano dalla storia locale al surrealismo, dall\'omaggio ai pescatori alla critica sociale. Una passeggiata nel centro storico è un percorso d\'arte all\'aria aperta imperdibile.',
+    mur_guide:'Guida ai Murales', mur_credits:'Contenuti di approfondimento da <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> e <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a>',
+    // Cirella
+    cir_h3:'Ruderi di Cirella', cir_loc:'Cirella Vecchia, Diamante (CS) — Vedi su Maps',
+    cir_p:'Antico insediamento dal Paleolitico. Ogni estate un <strong>teatro a cielo aperto</strong> tra le mura di Cirella ospita artisti nazionali e internazionali — un\'esperienza unica sotto le stelle.',
+    cir_exp:'Cirella è un\'antica città fantasma sulla collina sopra Diamante, con origini preistoriche. Attraverso incursioni saracene, Borboni e abbandoni, conserva ruderi del castello baronale e di antiche chiese. D\'estate il festival di musica tra le rovine crea un\'atmosfera senza eguali.',
+    // Mercati
+    merc_h3:'Mercati Tradizionali', merc_loc:'Riviera dei Cedri — Vedi su Maps',
+    merc_p:'La Riviera è animata da <strong>mercati settimanali</strong> con prodotti freschi, abbigliamento e oggetti locali — quotidianità autentica da vivere.',
+    merc_exp:'Lungo la Riviera ci sono mercati settimanali in diversi paesi: tra questi <strong>Cittadella del Capo</strong> il giovedì mattina, <strong>Cetraro</strong> il sabato mattina, e mercati estivi in altri comuni. Tra le bancarelle: frutta, verdura e pesce freschi, artigianato, spezie, abbigliamento.',
+    // Atlantide
+    atl_h3:'Atlantide — Museo Subacqueo', atl_loc:'Isola di Cirella, Diamante (CS) — Vedi su Maps',
+    atl_p:'Un museo unico: le opere si ammirano <strong>sott\'acqua</strong>. Tra i fondali dell\'Isola di Cirella, sculture riposano tra posidonia e pesci. Accessibile con semplice snorkeling.',
+    atl_exp:'Le sculture di Francesco Minuti sono diventate parte dell\'ecosistema marino: pesci, polipi e alghe le abitano quotidianamente. Per raggiungerle bastano maschera e pinne, a pochi metri dalla riva dell\'Isola di Cirella. Un\'esperienza tra arte, natura e silenzio sommerso.',
+    // Cascata
+    casc_h3:'Cascata del Vuglio', casc_loc:'Sangineto (CS) — Vedi su Maps',
+    casc_p:'Immersa in un <strong>paesaggio incontaminato</strong> nel comune di Sangineto, la Cascata del Vuglio è raggiungibile con una breve passeggiata tra felci e liane. E ha persino fatto da set cinematografico!',
+    casc_exp1:'Riscoperta e valorizzata da un gruppo di volontari locali, la Cascata del Vuglio si trova nel comune di Sangineto. Immersa in una gola rocciosa di vegetazione fitta, è ideale per una pausa fresca nelle calde giornate estive.',
+    casc_exp2:'<strong>Prenotazione obbligatoria:</strong> chiamare il <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> ore 10:00–13:00 e 14:30–17:30.',
+    casc_exp3:'<strong>Set cinematografico:</strong> Sangineto ha ospitato le riprese del film <em>"La Voce di Cupido"</em>, commedia romantica diretta da Ago Panini, cofinanziata dalla Calabria Film Commission, andata in onda su Rai nel dicembre 2025.',
+    // Arcomagno
+    arco_p:'Un maestoso <strong>arco naturale</strong> scolpito dal mare che custodisce una laguna a mezzaluna segreta — la Grotta del Saraceno. Uno dei luoghi più belli della Calabria.',
+    arco_loc:'San Nicola Arcella (CS) — Vedi su Maps',
+    arco_exp:'L\'arco naturale, alto decine di metri, incornicia una piccola spiaggia di ciottoli bianchi e un\'acqua turchese intenso. Vi si accede a piedi tramite sentiero dalla spiaggia di San Nicola Arcella, oppure in barca. Al tramonto lo spettacolo è straordinario.',
+    // Cammino
+    camm_h3:'Cammino di San Francesco', camm_loc:'Catena Costiera, Calabria — Vedi su Maps',
+    camm_p:'Un percorso di <strong>112 km in 6 tappe</strong> attraverso la Catena Costiera calabrese, tra borghi, boschi di faggio e scorci panoramici sul mare. Sulle orme del patrono della Calabria.',
+    camm_exp:'Da San Marco Argentano fino al Santuario di Paternò Calabro, con tappe intermedie a Paola. Per esperienze più brevi: la Via del Giovane e la Via dell\'Eremita. Periodo ideale: primavera e autunno. Lungo il percorso, borghi, eremi e punti panoramici sul Tirreno.',
+    // Grotta Romito
+    rom_h3:'Grotta del Romito', rom_loc:'Papasidero (CS) — Vedi su Maps',
+    rom_p:'Una delle più antiche testimonianze di arte preistorica in Europa: graffito di un bovide <strong>scolpito oltre 12.000 anni fa</strong>. Visitabile con passerelle e visite guidate.',
+    rom_exp:'Il bovide inciso nella roccia risale a circa 12.000 anni fa ed è uno dei più grandi e meglio conservati esempi di arte rupestre italiana. Il sito include anche sepolture e reperti dell\'Homo sapiens nel Paleolitico. Accessibile tramite passerelle con visita guidata.',
+    // Laos
+    laos_h3:'Parco Archeologico di Laos', laos_loc:'Santa Maria del Cedro (CS) — Vedi su Maps',
+    laos_p:'Sorta dopo Sibari, Laos conserva resti di <strong>mura difensive, abitazioni e aree artigianali</strong> — raro esempio di urbanistica greca affacciata sul mare, abbandonata nel III sec. a.C.',
+    laos_exp:'Fondata nel VI sec. a.C. da coloni greci provenienti da Sibari. Il sito ospita la "Casa con la Rampa" e la "Casa col Mosaico". Il contesto paesaggistico, tra vigneti e mare, lo rende straordinario. Parco aperto al pubblico.',
+    // Bretti
+    bret_h3:'Museo dei Brettii e del Mare', bret_loc:'Cetraro (CS) — Vedi su Maps',
+    bret_p:'Racconta la storia del territorio tra IV e III sec. a.C. Da non perdere la sezione marina con <strong>anfore rinvenute lungo la costa</strong> e la collezione cartografica Losardo.',
+    bret_exp:'Allestito con criterio didattico, racconta il popolo dei Brettii e il territorio costiero. Ospita anfore, ancore e reperti pescati lungo tutta la Riviera, oltre alla preziosa collezione cartografica donata dal professor Raffaello Losardo.',
+    // Castello
+    cast_h3:'Castello del Principe', cast_loc:'Sangineto (CS) — Vedi su Maps',
+    cast_p:'Il <strong>Castello di Sangineto</strong> del XV secolo — quattro torri cilindriche, mura merlate, costruito dai Sanseverino di Bisignano. Luogo del cuore FAI, ancora oggi vivo e attivo.',
+    cast_exp1:'Affacciato sulla foce del fiume, il Castello di Sangineto è una fortezza del XV secolo edificata dai Sanseverino di Bisignano. Caratterizzato da quattro torri cilindriche in pietra locale e un ampio cortile interno, ha ospitato le famiglie Majorana e Firrao, fungendo da carcere durante la Prima Guerra Mondiale. Oggi è un luogo del cuore FAI e una suggestiva location per eventi.',
+    cast_exp2:'Durante tutto l\'anno il Castello organizza <strong>giornate culturali, mercatini di Natale</strong> nel periodo natalizio e altre attività per la comunità. D\'estate, per qualche serata speciale, si trasforma in discoteca tra le mura medievali.',
+    // Santuario
+    sanf_h3:'Santuario di San Francesco di Paola', sanf_loc:'Paola (CS) — Vedi su Maps',
+    sanf_p:'Tra i più importanti luoghi di pellegrinaggio del Sud Italia, dedicato al <strong>patrono della Calabria</strong>. Dalla basilica moderna alla "Fonte della Cucchiarella" fino all\'eremo.',
+    sanf_exp:'Il complesso comprende la basilica moderna, la basilica antica con le reliquie del santo, l\'eremo dove San Francesco visse in solitudine e la suggestiva Fonte della Cucchiarella. Centinaia di migliaia di pellegrini ogni anno. Un luogo di fede, arte e storia profonda.',
+    // Convento
+    conv_h3:'Convento dei Cappuccini', conv_loc:'Belvedere Marittimo (CS) — Vedi su Maps',
+    conv_p:'Belvedere Marittimo è il <strong>"borgo degli innamorati"</strong>: nel convento del 1595 sono custodite le reliquie di San Valentino. Il 14 febbraio coppie da tutta Italia si ritrovano qui.',
+    conv_exp:'Il convento conserva altari barocchi, affreschi mariani e opere d\'arte sacra. Le reliquie di San Valentino lo rendono meta di pellegrinaggio romantico unica in Italia. Belvedere Marittimo, con il suo centro storico medievale e la vista sul mare, è uno dei borghi più affascinanti della Riviera.',
+    // Muoversi
+    stations_title:'Stazioni della Riviera', transfer_title:'Servizio Transfer', airports_title:'Aeroporti vicini', useful_links:'Link utili',
+    transfer_text:'Per transfer da stazioni e aeroporti, rivolgersi alla <strong>Reception dell\'Hotel</strong>. Organizziamo escursioni personalizzate e consigliamo i migliori itinerari.',
+    cs_banner:'Scopri la Calabria con <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — il portale ufficiale del turismo calabrese'
+  },
+  en: {
+    hero_tag: 'Riviera dei Cedri · Calabria',
+    hero_h1: 'Beauty<br>all around<br>us',
+    hero_h2: 'Exploring the Riviera dei Cedri',
+    hero_p: 'An authentic territory rich in history, nature and traditions, captivating with its varied landscapes and unspoiled beauty. An invitation to discover a different Calabria — sea, culture and silences that speak.',
+    badge1:'Crystal-clear sea', badge2:'Green mountains', badge3:'Millennial history', badge4:'Unique experiences',
+    scroll_hint: 'Discover',
+    strip_kw: 'Visits · Excursions · Experiences · Transport',
+    strip_sub: 'Discover everything you can do during your stay',
+    visitare_label:'The Territory', visitare_title:'What to visit?',
+    visitare_sub:'A blend of seaside towns and small villages among hills and mountains. A land rich in colours, flavours and stories to discover.',
+    coast_label:'Coast — 15 seaside towns', inland_label:'Inland — Villages to explore',
+    maps_btn:'Explore the Riviera on Google Maps',
+    big_quote:'"Between the <span>blue of the sea</span> and the <span>green of the mountains</span>,<br>every day here is a new experience."',
+    esp_label:'Adventure & Sport', esp_title:'Endless experiences',
+    esp_sub:'From the sky to the waters of the Lao, the Riviera dei Cedri offers thrills for everyone.',
+    cult_label:'Arts & Culture', cult_title:'Beauty and tradition',
+    cult_sub:'Street art, open-air concerts, local markets and one-of-a-kind museums.',
+    nat_label:'Nature', nat_title:'Natural wonders',
+    nat_sub:'Hidden waterfalls, sea-carved arches, wild gorges and trails through untouched forests.',
+    stor_label:'Archaeology & History', stor_title:'History all around us',
+    stor_sub:'From prehistory to Magna Graecia, museums and sites that tell millennia of civilisation.',
+    sacri_label:'Spirituality', sacri_title:'Sacred places',
+    sacri_sub:'Faith, art and spirituality in places that move the soul and tell centuries of devotion.',
+    muov_label:'Getting around', muov_title:'How to get around?',
+    muov_sub:'The Riviera dei Cedri is well connected. Click on stations to view them on Maps, or buy tickets directly on Trenitalia.',
+    footer_tagline:'Visits · Excursions · Experiences · Transport<br><em>Your adventure starts here.</em>',
+    footer_info:'For information and excursions:',
+    tag_avventura:'Adventure', tag_mare:'Sea', tag_natura:'Nature', tag_arte:'Art',
+    tag_cultura:'Culture', tag_tradizione:'Tradition', tag_subacqueo:'Underwater Art',
+    tag_trekking:'Trekking', tag_preistoria:'Prehistory', tag_magnagrecia:'Magna Graecia',
+    tag_museo:'Museum', tag_medioevo:'Medieval', tag_pellegrinaggio:'Pilgrimage', tag_romantico:'Romantic',
+    btn_more:'Find out more', official_site:'Official Website', learn_more:'Learn more', reviews_ta:'TripAdvisor Reviews',
+    para_h3:'Paragliding', para_loc:'Praia a Mare (CS) — View on Maps', para_book:'Book: +39 333 664 3336',
+    para_p:'A breathtaking experience: take off from <strong>600 metres altitude</strong> for a 15–20 minute panoramic flight over stunning sea and mountain scenery. Qualified instructors included.',
+    para_exp1:'The tandem flight with an instructor is the easiest way to fly with no prior experience. You depart from Praia a Mare by 4x4 minibus to the launch site, then land gently on the beach. Unique views of Isola di Dino. Flights available daily 10:00–18:00 (summer) and 11:00–15:00 (winter).',
+    para_exp2:'Operated by <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.',
+    raft_h3:'Lao River Rafting', raft_loc:'Papasidero (CS) — View on Maps',
+    raft_p:'Through the wild gorges of the Pollino Park, the <strong>Lao river</strong> offers unique rafting in Calabria. Over <strong>30 navigable km</strong>, certified instructors, suitable for beginners.',
+    raft_exp:'The Lao flows between rock walls up to 200 metres high. Routes vary in difficulty, ideal for families, couples and groups. Best season: April–September. Rafting centres provide full equipment and expert Pollino National Park guides.',
+    barca_h3:'Boat Excursions', barca_loc:'Praia a Mare — Isola di Dino — View on Maps',
+    barca_p:'Tours among caves, coves and spectacular rocks, with <strong>sunset aperitifs</strong> and exclusive outings to Isola di Dino and the coastal inlets.',
+    barca_exp:'Excursions depart from the Riviera\'s small harbours. Navigate among the sea caves of Arcomagno, the seabed of San Nicola Arcella and the coves of Praia a Mare. Bareboat hire also available. Sunset aperitif service on request.',
+    rap_h3:'Raptor Experience', rap_loc:'Bonifati (CS) — View on Maps',
+    rap_p:'An authentic experience with birds of prey, between <strong>free flights</strong> and walks in the forest. Educational moments, nature and photography in stunning Coastal Chain locations. In summer, raptor afternoons are organised on request directly at the hotel.',
+    rap_exp:'Falcons and other birds of prey presented by expert falconers in natural environments of the Coastal Chain. Activities include flight displays, close-up photo moments and the chance to hold a raptor on the glove. Suitable for children and families. For hotel event dates, contact our Reception.',
+    mur_h3:'Murals of Diamante', mur_loc:'Diamante (CS) — View on Maps',
+    mur_p:'Since 1981 Diamante has been an <strong>open-air museum</strong>: over 300 murals colour the streets of the old town, blending art, poetry and tradition. Every alley holds a surprise.',
+    mur_exp:'The murals began in 1981 with an international exhibition. Since then Diamante has become one of Italy\'s most important street art destinations. Themes range from local history to surrealism, from fishermen\'s tributes to social commentary. A walk through the historic centre is a must-see outdoor art trail.',
+    mur_guide:'Mural Guide', mur_credits:'In-depth content by <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> and <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a>',
+    cir_h3:'Ruins of Cirella', cir_loc:'Cirella Vecchia, Diamante (CS) — View on Maps',
+    cir_p:'An ancient settlement since the Palaeolithic. Every summer an <strong>open-air theatre</strong> among Cirella\'s walls hosts national and international artists — a unique experience under the stars.',
+    cir_exp:'Cirella is an ancient ghost town on the hill above Diamante, with prehistoric origins. Through Saracen raids, Bourbons and abandonment, it preserves ruins of the baronial castle and ancient churches. In summer the music festival among the ruins creates an unmatched atmosphere.',
+    merc_h3:'Traditional Markets', merc_loc:'Riviera dei Cedri — View on Maps',
+    merc_p:'The Riviera comes alive with <strong>weekly markets</strong> selling fresh produce, clothing and local goods — authentic everyday life to experience.',
+    merc_exp:'Weekly markets take place in various towns along the Riviera: <strong>Cittadella del Capo</strong> on Thursday mornings, <strong>Cetraro</strong> on Saturday mornings, and summer markets in other municipalities. Stalls offer fresh fruit, vegetables and fish, crafts, spices and clothing.',
+    atl_h3:'Atlantide — Underwater Museum', atl_loc:'Isola di Cirella, Diamante (CS) — View on Maps',
+    atl_p:'A one-of-a-kind museum: artworks are admired <strong>underwater</strong>. On the seabed of Isola di Cirella, sculptures rest among posidonia and fish. Accessible with simple snorkelling.',
+    atl_exp:'Francesco Minuti\'s sculptures have become part of the marine ecosystem: fish, octopus and algae inhabit them daily. Just mask and fins needed, a few metres from the shore of Isola di Cirella. An experience of art, nature and submerged silence.',
+    casc_h3:'Vuglio Waterfall', casc_loc:'Sangineto (CS) — View on Maps',
+    casc_p:'Nestled in an <strong>unspoiled landscape</strong> in Sangineto, the Vuglio Waterfall is reached via a short walk through ferns and vines. It even served as a film set!',
+    casc_exp1:'Rediscovered and enhanced by local volunteers, the Vuglio Waterfall is in the municipality of Sangineto. Set in a rocky gorge of dense vegetation, it\'s ideal for a cool break on hot summer days.',
+    casc_exp2:'<strong>Booking required:</strong> call <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> 10:00–13:00 and 14:30–17:30.',
+    casc_exp3:'<strong>Film location:</strong> Sangineto hosted the filming of <em>"La Voce di Cupido"</em>, a romantic comedy directed by Ago Panini, co-funded by the Calabria Film Commission, broadcast on Rai in December 2025.',
+    arco_p:'A majestic <strong>natural arch</strong> carved by the sea, guarding a secret crescent lagoon — the Grotta del Saraceno. One of Calabria\'s most beautiful places.',
+    arco_loc:'San Nicola Arcella (CS) — View on Maps',
+    arco_exp:'The natural arch, tens of metres high, frames a small white-pebble beach and intense turquoise water. Accessible on foot via a path from San Nicola Arcella beach, or by boat. At sunset the spectacle is extraordinary.',
+    camm_h3:'Way of Saint Francis', camm_loc:'Coastal Chain, Calabria — View on Maps',
+    camm_p:'A <strong>112 km route in 6 stages</strong> through the Calabrian Coastal Chain, among villages, beech forests and panoramic sea views. In the footsteps of Calabria\'s patron saint.',
+    camm_exp:'From San Marco Argentano to the Sanctuary of Paternò Calabro, with intermediate stops at Paola. For shorter experiences: the Via del Giovane and Via dell\'Eremita. Best time: spring and autumn. Along the route, villages, hermitages and Tyrrhenian viewpoints.',
+    rom_h3:'Grotta del Romito', rom_loc:'Papasidero (CS) — View on Maps',
+    rom_p:'One of Europe\'s oldest prehistoric art testimonies: a bovid engraving <strong>carved over 12,000 years ago</strong>. Visitable with walkways and guided tours.',
+    rom_exp:'The bovid carved into the rock dates back some 12,000 years and is one of the largest and best-preserved examples of Italian cave art. The site also includes burials and Homo sapiens artefacts from the Palaeolithic. Accessible via walkways with guided tour.',
+    laos_h3:'Archaeological Park of Laos', laos_loc:'Santa Maria del Cedro (CS) — View on Maps',
+    laos_p:'Founded after Sybaris, Laos preserves remains of <strong>defensive walls, dwellings and craft areas</strong> — a rare example of Greek town planning facing the sea, abandoned in the 3rd century BC.',
+    laos_exp:'Founded in the 6th century BC by Greek colonists from Sybaris. The site hosts the "House with the Ramp" and the "House with the Mosaic". The landscape setting, between vineyards and sea, makes it extraordinary. Park open to the public.',
+    bret_h3:'Museum of the Brettii and the Sea', bret_loc:'Cetraro (CS) — View on Maps',
+    bret_p:'Tells the story of the territory between the 4th and 3rd centuries BC. Don\'t miss the maritime section with <strong>amphorae found along the coast</strong> and the Losardo cartographic collection.',
+    bret_exp:'Set up with an educational approach, it tells the story of the Brettii people and the coastal territory. It houses amphorae, anchors and artefacts fished along the entire Riviera, as well as the precious cartographic collection donated by Professor Raffaello Losardo.',
+    cast_h3:'Castello del Principe', cast_loc:'Sangineto (CS) — View on Maps',
+    cast_p:'The <strong>Castello di Sangineto</strong> from the 15th century — four cylindrical towers, battlemented walls, built by the Sanseverino di Bisignano. A FAI "places of the heart" site, still alive and active today.',
+    cast_exp1:'Overlooking the river mouth, Sangineto Castle is a 15th-century fortress built by the Sanseverino di Bisignano. With four cylindrical towers in local stone and a large inner courtyard, it hosted the Majorana and Firrao families and served as a prison during World War One. Today it is a FAI heritage site and an evocative event venue.',
+    cast_exp2:'Throughout the year the Castle organises <strong>cultural days, Christmas markets</strong> and other community activities. In summer, on special evenings, it transforms into an open-air disco within medieval walls.',
+    sanf_h3:'Sanctuary of San Francesco di Paola', sanf_loc:'Paola (CS) — View on Maps',
+    sanf_p:'One of southern Italy\'s most important pilgrimage sites, dedicated to <strong>Calabria\'s patron saint</strong>. From the modern basilica to the "Fonte della Cucchiarella" spring and the hermitage.',
+    sanf_exp:'The complex includes the modern basilica, the ancient basilica with the saint\'s relics, the hermitage where San Francesco lived in solitude and the evocative Fonte della Cucchiarella spring. Hundreds of thousands of pilgrims each year. A place of deep faith, art and history.',
+    conv_h3:'Cappuccini Convent', conv_loc:'Belvedere Marittimo (CS) — View on Maps',
+    conv_p:'Belvedere Marittimo is the <strong>"village of lovers"</strong>: the 1595 convent houses the relics of Saint Valentine. On 14 February couples from all over Italy gather here.',
+    conv_exp:'The convent preserves baroque altars, Marian frescoes and sacred artworks. Saint Valentine\'s relics make it a unique romantic pilgrimage destination in Italy. Belvedere Marittimo, with its medieval old town and sea views, is one of the Riviera\'s most charming villages.',
+    stations_title:'Riviera Stations', transfer_title:'Transfer Service', airports_title:'Nearby Airports', useful_links:'Useful Links',
+    transfer_text:'For transfers from stations and airports, contact the <strong>Hotel Reception</strong>. We organise personalised excursions and recommend the best itineraries.',
+    cs_banner:'Discover Calabria with <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — the official Calabrian tourism portal'
+  },
+  de: {
+    hero_tag: 'Riviera dei Cedri · Kalabrien',
+    hero_h1: 'Schönheiten<br>um uns<br>herum',
+    hero_h2: 'Unterwegs an der Riviera dei Cedri',
+    hero_p: 'Ein authentisches Gebiet voller Geschichte, Natur und Tradition, das mit seinen abwechslungsreichen Landschaften und unberührter Schönheit fasziniert. Eine Einladung, ein anderes Kalabrien zu entdecken — Meer, Kultur und sprechende Stille.',
+    badge1:'Kristallklares Meer', badge2:'Grüne Berge', badge3:'Jahrtausende Geschichte', badge4:'Einzigartige Erlebnisse',
+    scroll_hint: 'Entdecken',
+    strip_kw: 'Besuche · Ausflüge · Erlebnisse · Mobilität',
+    strip_sub: 'Entdecken Sie alles, was Sie während Ihres Aufenthalts unternehmen können',
+    visitare_label:'Das Gebiet', visitare_title:'Was gibt es zu sehen?',
+    visitare_sub:'Ein Geflecht aus Küstenorten und kleinen Dörfern zwischen Hügeln und Bergen. Ein Land voller Farben, Aromen und Geschichten.',
+    coast_label:'Küste — 15 Badeorte', inland_label:'Hinterland — Dörfer zum Entdecken',
+    maps_btn:'Die Riviera auf Google Maps erkunden',
+    big_quote:'"Zwischen dem <span>Blau des Meeres</span> und dem <span>Grün der Berge</span>,<br>ist jeder Tag hier ein neues Erlebnis."',
+    esp_label:'Abenteuer & Sport', esp_title:'Grenzenlose Erlebnisse',
+    esp_sub:'Vom Himmel bis zu den Gewässern des Lao bietet die Riviera dei Cedri Abenteuer für jeden Geschmack.',
+    cult_label:'Kunst & Kultur', cult_title:'Schönheit und Tradition',
+    cult_sub:'Straßenkunst, Open-Air-Konzerte, lokale Märkte und einzigartige Museen.',
+    nat_label:'Natur', nat_title:'Naturwunder',
+    nat_sub:'Versteckte Wasserfälle, vom Meer geformte Bögen, wilde Schluchten und Pfade durch unberührte Wälder.',
+    stor_label:'Archäologie & Geschichte', stor_title:'Die Geschichte um uns herum',
+    stor_sub:'Von der Vorgeschichte bis Magna Graecia — Museen und Stätten, die Jahrtausende der Zivilisation erzählen.',
+    sacri_label:'Spiritualität', sacri_title:'Heilige Orte',
+    sacri_sub:'Glaube, Kunst und Spiritualität an Orten, die die Seele berühren und Jahrhunderte der Andacht erzählen.',
+    muov_label:'Mobilität', muov_title:'Wie kommt man hin?',
+    muov_sub:'Die Riviera dei Cedri ist gut angebunden. Klicken Sie auf Bahnhöfe, um sie auf Maps anzusehen, oder kaufen Sie Tickets direkt bei Trenitalia.',
+    footer_tagline:'Besuche · Ausflüge · Erlebnisse · Mobilität<br><em>Ihr Abenteuer beginnt hier.</em>',
+    footer_info:'Für Informationen und Ausflüge:',
+    tag_avventura:'Abenteuer', tag_mare:'Meer', tag_natura:'Natur', tag_arte:'Kunst',
+    tag_cultura:'Kultur', tag_tradizione:'Tradition', tag_subacqueo:'Unterwasserkunst',
+    tag_trekking:'Trekking', tag_preistoria:'Vorgeschichte', tag_magnagrecia:'Magna Graecia',
+    tag_museo:'Museum', tag_medioevo:'Mittelalter', tag_pellegrinaggio:'Wallfahrt', tag_romantico:'Romantisch',
+    btn_more:'Mehr erfahren', official_site:'Offizielle Website', learn_more:'Mehr erfahren', reviews_ta:'TripAdvisor Bewertungen',
+    para_h3:'Gleitschirmfliegen', para_loc:'Praia a Mare (CS) — Auf Maps ansehen', para_book:'Buchen: +39 333 664 3336',
+    para_p:'Ein atemberaubendes Erlebnis: Start aus <strong>600 Metern Höhe</strong> für einen 15–20-minütigen Panoramaflug über spektakuläre Meeres- und Berglandschaften. Qualifizierte Instruktoren inklusive.',
+    para_exp1:'Der Tandemflug mit Instruktor ist der einfachste Weg zu fliegen – keine Vorkenntnisse nötig. Abfahrt von Praia a Mare mit dem Schulbus bis zur Abflugzone, dann sanfte Landung am Strand. Einzigartige Aussicht auf die Isola di Dino. Flüge täglich 10:00–18:00 (Sommer) und 11:00–15:00 (Winter).',
+    para_exp2:'Betrieben von der <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.',
+    raft_h3:'Rafting auf dem Lao', raft_loc:'Papasidero (CS) — Auf Maps ansehen',
+    raft_p:'In den wilden Schluchten des Pollino-Parks bietet der <strong>Fluss Lao</strong> einzigartiges Rafting in Kalabrien. Über <strong>30 befahrbare Kilometer</strong>, zertifizierte Instruktoren, auch für Anfänger geeignet.',
+    raft_exp:'Der Lao fließt zwischen Felswänden von bis zu 200 Metern Höhe. Die Abschnitte variieren im Schwierigkeitsgrad und eignen sich für Familien, Paare und Gruppen. Beste Saison: April–September. Raftingzentren bieten vollständige Ausrüstung und erfahrene Pollino-Nationalpark-Guides.',
+    barca_h3:'Bootsausflüge', barca_loc:'Praia a Mare — Isola di Dino — Auf Maps ansehen',
+    barca_p:'Touren zwischen Grotten, Buchten und spektakulären Felsen, mit möglichen <strong>Sunset-Aperitifs</strong> und exklusiven Ausflügen zur Isola di Dino und den Küstenbuchten.',
+    barca_exp:'Ausflüge starten von den kleinen Häfen der Riviera. Fahrt zwischen den Meereshöhlen des Arcomagno, dem Meeresgrund von San Nicola Arcella und den Buchten von Praia a Mare. Bootscharter ohne Skipper verfügbar. Sunset-Aperitif auf Anfrage.',
+    rap_h3:'Greifvogelerlebnis', rap_loc:'Bonifati (CS) — Auf Maps ansehen',
+    rap_p:'Ein authentisches Erlebnis mit Greifvögeln zwischen <strong>freien Flügen</strong> und Waldspaziergängen. Lehrreiche Momente, Natur und Fotografie an beeindruckenden Standorten der Küstenkette. Im Sommer werden auf Anfrage Greifvogel-Nachmittage direkt im Hotel organisiert.',
+    rap_exp:'Falken und andere Greifvögel präsentiert von erfahrenen Falknern in natürlicher Umgebung der Küstenkette. Aktivitäten umfassen Flugvorführungen, Nahaufnahmen und die Möglichkeit, einen Greifvogel auf dem Handschuh zu halten. Für Kinder und Familien geeignet.',
+    mur_h3:'Wandbilder von Diamante', mur_loc:'Diamante (CS) — Auf Maps ansehen',
+    mur_p:'Seit 1981 ist Diamante ein <strong>Freilichtmuseum</strong>: über 300 Wandbilder schmücken die Straßen der Altstadt und verbinden Kunst, Poesie und Tradition. Jede Gasse birgt eine Überraschung.',
+    mur_exp:'Die Wandbilder entstanden 1981 bei einer internationalen Ausstellung. Seitdem ist Diamante eines der bedeutendsten Straßenkunstziele Italiens. Die Themen reichen von lokaler Geschichte bis Surrealismus. Ein Spaziergang durch die Altstadt ist ein unverzichtbarer Kunstpfad.',
+    mur_guide:'Wandbild-Führer', mur_credits:'Inhalte von <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> und <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a>',
+    cir_h3:'Ruinen von Cirella', cir_loc:'Cirella Vecchia, Diamante (CS) — Auf Maps ansehen',
+    cir_p:'Antike Siedlung seit dem Paläolithikum. Jeden Sommer beherbergt ein <strong>Freilufttheater</strong> zwischen den Mauern von Cirella nationale und internationale Künstler — ein einzigartiges Erlebnis unter dem Sternenhimmel.',
+    cir_exp:'Cirella ist eine antike Geisterstadt auf dem Hügel über Diamante mit vorgeschichtlichen Ursprüngen. Durch Sarazeneneinfälle, Bourbonen und Aufgabe bewahrt sie Ruinen der Baronienburg und alter Kirchen. Im Sommer schafft das Musikfestival zwischen den Ruinen eine unvergleichliche Atmosphäre.',
+    merc_h3:'Traditionelle Märkte', merc_loc:'Riviera dei Cedri — Auf Maps ansehen',
+    merc_p:'Die Riviera wird von <strong>Wochenmärkten</strong> mit frischen Produkten, Kleidung und lokalen Waren belebt — authentisches Alltagsleben zum Erleben.',
+    merc_exp:'Entlang der Riviera gibt es Wochenmärkte in verschiedenen Orten: <strong>Cittadella del Capo</strong> donnerstags, <strong>Cetraro</strong> samstags und Sommermärkte anderswo. An den Ständen: frisches Obst, Gemüse und Fisch, Handwerk, Gewürze und Kleidung.',
+    atl_h3:'Atlantide — Unterwassermuseum', atl_loc:'Isola di Cirella, Diamante (CS) — Auf Maps ansehen',
+    atl_p:'Ein einzigartiges Museum: Kunstwerke werden <strong>unter Wasser</strong> bewundert. Auf dem Meeresgrund der Isola di Cirella ruhen Skulpturen zwischen Posidonia und Fischen. Mit einfachem Schnorcheln zugänglich.',
+    atl_exp:'Francesco Minutis Skulpturen sind Teil des Meeresökosystems geworden: Fische, Kraken und Algen bewohnen sie täglich. Nur Maske und Flossen nötig, wenige Meter vom Ufer der Isola di Cirella. Ein Erlebnis aus Kunst, Natur und versunkener Stille.',
+    casc_h3:'Vuglio-Wasserfall', casc_loc:'Sangineto (CS) — Auf Maps ansehen',
+    casc_p:'Eingebettet in eine <strong>unberührte Landschaft</strong> in Sangineto, ist der Vuglio-Wasserfall über einen kurzen Spaziergang durch Farne und Lianen erreichbar. Er diente sogar als Filmkulisse!',
+    casc_exp1:'Vom lokalen Freiwilligen wiederentdeckt und aufgewertet, liegt der Vuglio-Wasserfall in Sangineto. In einer dicht bewachsenen Felsschlucht gelegen, ist er ideal für eine kühle Pause an heißen Sommertagen.',
+    casc_exp2:'<strong>Buchung erforderlich:</strong> Anruf unter <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> 10:00–13:00 und 14:30–17:30.',
+    casc_exp3:'<strong>Filmkulisse:</strong> Sangineto beherbergte Dreharbeiten von <em>"La Voce di Cupido"</em>, einer romantischen Komödie von Ago Panini, mitfinanziert von der Calabria Film Commission, ausgestrahlt auf Rai im Dezember 2025.',
+    arco_p:'Ein majestätischer <strong>Naturbogen</strong>, vom Meer geformt, der eine geheime halbmondförmige Lagune — die Grotta del Saraceno — birgt. Einer der schönsten Orte Kalabriens.',
+    arco_loc:'San Nicola Arcella (CS) — Auf Maps ansehen',
+    arco_exp:'Der Naturbogen, Dutzende Meter hoch, umrahmt einen kleinen Kieselstrand und intensiv türkisfarbenes Wasser. Zugänglich zu Fuß über einen Pfad von San Nicola Arcella oder per Boot. Bei Sonnenuntergang ist das Schauspiel außergewöhnlich.',
+    camm_h3:'Jakobsweg des hl. Franz von Paola', camm_loc:'Küstenkette, Kalabrien — Auf Maps ansehen',
+    camm_p:'Eine <strong>112 km lange Route in 6 Etappen</strong> durch die kalabrische Küstenkette, zwischen Dörfern, Buchenwäldern und Panoramablicken aufs Meer. Auf den Spuren des Schutzpatrons Kalabriens.',
+    camm_exp:'Von San Marco Argentano bis zum Heiligtum von Paternò Calabro, mit Zwischenstopps in Paola. Für kürzere Erlebnisse: Via del Giovane und Via dell\'Eremita. Beste Zeit: Frühling und Herbst.',
+    rom_h3:'Grotta del Romito', rom_loc:'Papasidero (CS) — Auf Maps ansehen',
+    rom_p:'Eines der ältesten Zeugnisse prähistorischer Kunst in Europa: eine Rindergravur, <strong>vor über 12.000 Jahren eingemeißelt</strong>. Besuchbar mit Stegen und geführten Touren.',
+    rom_exp:'Das in den Fels geritzte Rind stammt aus etwa 12.000 Jahren und ist eines der größten und besterhaltenen Beispiele italienischer Höhlenkunst. Die Stätte umfasst auch Begräbnisse und Homo-sapiens-Funde aus dem Paläolithikum.',
+    laos_h3:'Archäologischer Park von Laos', laos_loc:'Santa Maria del Cedro (CS) — Auf Maps ansehen',
+    laos_p:'Nach Sybaris gegründet, bewahrt Laos Überreste von <strong>Befestigungsmauern, Wohnhäusern und Handwerksbereichen</strong> — seltenes Beispiel griechischer Stadtplanung am Meer, im 3. Jh. v. Chr. aufgegeben.',
+    laos_exp:'Im 6. Jh. v. Chr. von griechischen Kolonisten aus Sybaris gegründet. Das Gelände beherbergt das "Haus mit der Rampe" und das "Haus mit dem Mosaik". Die Landschaft zwischen Weinbergen und Meer macht es außergewöhnlich.',
+    bret_h3:'Museum der Brettii und des Meeres', bret_loc:'Cetraro (CS) — Auf Maps ansehen',
+    bret_p:'Erzählt die Geschichte des Gebiets zwischen dem 4. und 3. Jh. v. Chr. Nicht verpassen: den Meeresbereich mit <strong>entlang der Küste gefundenen Amphoren</strong> und die Losardo-Kartensammlung.',
+    bret_exp:'Mit didaktischem Ansatz gestaltet, erzählt es die Geschichte des Brettii-Volkes. Beherbergt Amphoren, Anker und Funde aus der gesamten Riviera sowie die wertvolle Kartensammlung von Prof. Raffaello Losardo.',
+    cast_h3:'Castello del Principe', cast_loc:'Sangineto (CS) — Auf Maps ansehen',
+    cast_p:'Das <strong>Schloss von Sangineto</strong> aus dem 15. Jahrhundert — vier zylindrische Türme, Zinnen, erbaut von den Sanseverino di Bisignano. FAI-Herzensort, heute noch lebendig und aktiv.',
+    cast_exp1:'Am Flussmündung gelegen, ist das Schloss von Sangineto eine Festung aus dem 15. Jh. der Sanseverino di Bisignano. Mit vier zylindrischen Türmen aus lokalem Stein und großem Innenhof, beherbergte es die Familien Majorana und Firrao und diente im Ersten Weltkrieg als Gefängnis. Heute ist es ein FAI-Erbeort.',
+    cast_exp2:'Das ganze Jahr über organisiert das Schloss <strong>Kulturtage, Weihnachtsmärkte</strong> und andere Gemeinschaftsaktivitäten. Im Sommer verwandelt es sich an besonderen Abenden in eine Disco zwischen mittelalterlichen Mauern.',
+    sanf_h3:'Heiligtum des hl. Franz von Paola', sanf_loc:'Paola (CS) — Auf Maps ansehen',
+    sanf_p:'Einer der bedeutendsten Wallfahrtsorte Süditaliens, dem <strong>Schutzpatron Kalabriens</strong> gewidmet. Von der modernen Basilika bis zur "Fonte della Cucchiarella" und der Einsiedelei.',
+    sanf_exp:'Der Komplex umfasst die moderne Basilika, die alte Basilika mit den Reliquien des Heiligen, die Einsiedelei und die Fonte della Cucchiarella. Jährlich Hunderttausende Pilger. Ein Ort tiefen Glaubens, Kunst und Geschichte.',
+    conv_h3:'Kapuzinerkloster', conv_loc:'Belvedere Marittimo (CS) — Auf Maps ansehen',
+    conv_p:'Belvedere Marittimo ist das <strong>"Dorf der Liebenden"</strong>: Das Kloster von 1595 beherbergt die Reliquien des hl. Valentins. Am 14. Februar treffen sich Paare aus ganz Italien hier.',
+    conv_exp:'Das Kloster bewahrt Barockaltäre, marianische Fresken und sakrale Kunstwerke. Die Reliquien des hl. Valentins machen es zu einem einzigartigen romantischen Wallfahrtsort in Italien.',
+    stations_title:'Bahnhöfe der Riviera', transfer_title:'Transferservice', airports_title:'Nahegelegene Flughäfen', useful_links:'Nützliche Links',
+    transfer_text:'Für Transfers von Bahnhöfen und Flughäfen wenden Sie sich an die <strong>Hotelrezeption</strong>. Wir organisieren individuelle Ausflüge und empfehlen die besten Routen.',
+    cs_banner:'Entdecken Sie Kalabrien mit <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — dem offiziellen Tourismusportal Kalabriens'
+  },
+  fr: {
+    hero_tag: 'Riviera dei Cedri · Calabre',
+    hero_h1: 'Beautés<br>autour<br>de nous',
+    hero_h2: 'À la découverte de la Riviera dei Cedri',
+    hero_p: 'Un territoire authentique, riche en histoire, nature et traditions, qui fascine par ses paysages variés et sa beauté préservée. Une invitation à découvrir une Calabre différente — mer, culture et silences qui parlent.',
+    badge1:'Mer cristalline', badge2:'Montagnes vertes', badge3:'Histoire millénaire', badge4:'Expériences uniques',
+    scroll_hint: 'Découvrir',
+    strip_kw: 'Visites · Excursions · Expériences · Mobilité',
+    strip_sub: 'Découvrez tout ce que vous pouvez faire pendant votre séjour',
+    visitare_label:'Le Territoire', visitare_title:'Que visiter ?',
+    visitare_sub:'Un entrelacement de villages côtiers et de bourgs entre collines et montagnes. Un territoire riche en couleurs, saveurs et histoires à découvrir.',
+    coast_label:'Côte — 15 stations balnéaires', inland_label:'Arrière-pays — Bourgs à découvrir',
+    maps_btn:'Explorer la Riviera sur Google Maps',
+    big_quote:'"Entre le <span>bleu de la mer</span> et le <span>vert des montagnes</span>,<br>chaque jour ici est une nouvelle expérience."',
+    esp_label:'Aventure & Sport', esp_title:'Expériences sans fin',
+    esp_sub:'Du ciel aux eaux du Lao, la Riviera dei Cedri offre des émotions pour tous les goûts.',
+    cult_label:'Arts & Culture', cult_title:'Beauté et tradition',
+    cult_sub:'Art de rue, concerts en plein air, marchés locaux et musées uniques au monde.',
+    nat_label:'Nature', nat_title:'Merveilles naturelles',
+    nat_sub:'Cascades cachées, arches sculptées par la mer, gorges sauvages et sentiers dans des forêts intactes.',
+    stor_label:'Archéologie & Histoire', stor_title:'L\'histoire qui nous entoure',
+    stor_sub:'De la préhistoire à la Grande Grèce, musées et sites qui racontent des millénaires de civilisation.',
+    sacri_label:'Spiritualité', sacri_title:'Lieux sacrés',
+    sacri_sub:'Foi, art et spiritualité dans des lieux qui émeuvent l\'âme et racontent des siècles de dévotion.',
+    muov_label:'Mobilité', muov_title:'Comment se déplacer ?',
+    muov_sub:'La Riviera dei Cedri est bien desservie. Cliquez sur les gares pour les voir sur Maps, ou achetez vos billets directement sur Trenitalia.',
+    footer_tagline:'Visites · Excursions · Expériences · Mobilité<br><em>Votre aventure commence ici.</em>',
+    footer_info:'Pour informations et excursions :',
+    tag_avventura:'Aventure', tag_mare:'Mer', tag_natura:'Nature', tag_arte:'Art',
+    tag_cultura:'Culture', tag_tradizione:'Tradition', tag_subacqueo:'Art Subaquatique',
+    tag_trekking:'Trekking', tag_preistoria:'Préhistoire', tag_magnagrecia:'Grande Grèce',
+    tag_museo:'Musée', tag_medioevo:'Médiéval', tag_pellegrinaggio:'Pèlerinage', tag_romantico:'Romantique',
+    btn_more:'En savoir plus', official_site:'Site Officiel', learn_more:'En savoir plus', reviews_ta:'Avis TripAdvisor',
+    para_h3:'Parapente', para_loc:'Praia a Mare (CS) — Voir sur Maps', para_book:'Réserver : +39 333 664 3336',
+    para_p:'Une expérience à couper le souffle : décollage depuis <strong>600 mètres d\'altitude</strong> pour un vol panoramique de 15–20 minutes au-dessus de paysages spectaculaires entre mer et montagnes. Instructeurs qualifiés inclus.',
+    para_exp1:'Le vol en tandem avec instructeur est le moyen le plus simple de voler sans expérience préalable. Départ de Praia a Mare en minibus 4x4 jusqu\'au site de décollage, puis atterrissage en douceur sur la plage. Vue unique sur l\'Isola di Dino. Vols disponibles tous les jours 10h–18h (été) et 11h–15h (hiver).',
+    para_exp2:'Géré par la <strong>Scuola Ae.C. Riviera dei Cedri — FlyTirreno</strong>.',
+    raft_h3:'Rafting sur le Lao', raft_loc:'Papasidero (CS) — Voir sur Maps',
+    raft_p:'Dans les gorges sauvages du Parc du Pollino, le <strong>fleuve Lao</strong> offre un rafting unique en Calabre. Plus de <strong>30 km navigables</strong>, instructeurs certifiés, convient aux débutants.',
+    raft_exp:'Le Lao coule entre des parois rocheuses de 200 mètres de hauteur. Les parcours varient en difficulté, idéaux pour familles, couples et groupes. Meilleure saison : avril–septembre. Les centres proposent équipement complet et guides experts du Parc National du Pollino.',
+    barca_h3:'Excursions en Bateau', barca_loc:'Praia a Mare — Isola di Dino — Voir sur Maps',
+    barca_p:'Tours entre grottes, criques et rochers spectaculaires, avec possibilité d\'<strong>apéritifs au coucher du soleil</strong> et sorties exclusives vers l\'Isola di Dino et les anses côtières.',
+    barca_exp:'Les excursions partent des petits ports de la Riviera. Navigation entre les grottes marines d\'Arcomagno, les fonds de San Nicola Arcella et les criques de Praia a Mare. Location sans skipper disponible. Service apéritif au coucher du soleil sur réservation.',
+    rap_h3:'Expérience avec les Rapaces', rap_loc:'Bonifati (CS) — Voir sur Maps',
+    rap_p:'Une expérience authentique avec des rapaces, entre <strong>vols libres</strong> et promenades en forêt. Moments éducatifs, nature et photographie dans des cadres suggestifs de la Chaîne Côtière. En été, des après-midis avec les rapaces sont organisés sur réservation directement à l\'hôtel.',
+    rap_exp:'Faucons et autres rapaces présentés par des fauconniers experts dans des environnements naturels de la Chaîne Côtière. L\'activité inclut des démonstrations de vol, des moments photo rapprochés et la possibilité de tenir un rapace sur le gant. Convient aux enfants et familles.',
+    mur_h3:'Fresques de Diamante', mur_loc:'Diamante (CS) — Voir sur Maps',
+    mur_p:'Depuis 1981 Diamante est un <strong>musée à ciel ouvert</strong> : plus de 300 fresques colorent les rues du centre historique, entre art, poésie et tradition. Chaque ruelle réserve une surprise.',
+    mur_exp:'Les fresques sont nées en 1981 lors d\'une exposition internationale. Depuis lors, Diamante est l\'une des destinations de street art les plus importantes d\'Italie. Les thèmes vont de l\'histoire locale au surréalisme. Une promenade dans le centre historique est un parcours artistique incontournable.',
+    mur_guide:'Guide des Fresques', mur_credits:'Contenus approfondis par <a href="https://enricatancioni.com" target="_blank">Enrica Tancioni</a> et <a href="https://siviaggia.it" target="_blank">SiViaggia.it</a>',
+    cir_h3:'Ruines de Cirella', cir_loc:'Cirella Vecchia, Diamante (CS) — Voir sur Maps',
+    cir_p:'Ancien établissement depuis le Paléolithique. Chaque été un <strong>théâtre en plein air</strong> entre les murs de Cirella accueille des artistes nationaux et internationaux — une expérience unique sous les étoiles.',
+    cir_exp:'Cirella est une ancienne ville fantôme sur la colline au-dessus de Diamante, aux origines préhistoriques. À travers incursions sarrasines, Bourbons et abandons, elle conserve des ruines du château baronial et d\'anciennes églises. En été le festival de musique entre les ruines crée une atmosphère sans égale.',
+    merc_h3:'Marchés Traditionnels', merc_loc:'Riviera dei Cedri — Voir sur Maps',
+    merc_p:'La Riviera s\'anime de <strong>marchés hebdomadaires</strong> avec produits frais, vêtements et objets locaux — la vie quotidienne authentique à vivre.',
+    merc_exp:'Des marchés hebdomadaires se tiennent dans différentes localités : <strong>Cittadella del Capo</strong> le jeudi matin, <strong>Cetraro</strong> le samedi matin, et des marchés estivaux ailleurs. Aux étals : fruits, légumes et poissons frais, artisanat, épices et vêtements.',
+    atl_h3:'Atlantide — Musée Subaquatique', atl_loc:'Isola di Cirella, Diamante (CS) — Voir sur Maps',
+    atl_p:'Un musée unique : les œuvres s\'admirent <strong>sous l\'eau</strong>. Sur les fonds de l\'Isola di Cirella, des sculptures reposent parmi posidonie et poissons. Accessible avec simple masque et palmes.',
+    atl_exp:'Les sculptures de Francesco Minuti sont devenues partie de l\'écosystème marin : poissons, pieuvres et algues les habitent quotidiennement. Juste masque et palmes, à quelques mètres du rivage de l\'Isola di Cirella. Une expérience entre art, nature et silence immergé.',
+    casc_h3:'Cascade du Vuglio', casc_loc:'Sangineto (CS) — Voir sur Maps',
+    casc_p:'Nichée dans un <strong>paysage préservé</strong> à Sangineto, la Cascade du Vuglio est accessible via une courte promenade parmi fougères et lianes. Elle a même servi de décor cinématographique !',
+    casc_exp1:'Redécouverte et valorisée par des bénévoles locaux, la Cascade du Vuglio se trouve dans la commune de Sangineto. Nichée dans une gorge rocheuse à végétation dense, idéale pour une pause fraîche lors des chaudes journées d\'été.',
+    casc_exp2:'<strong>Réservation obligatoire :</strong> appeler le <a class="contact-pill" href="tel:3665818561" style="display:inline-flex;margin:0 4px">366 581 8561</a> 10h–13h et 14h30–17h30.',
+    casc_exp3:'<strong>Décor cinématographique :</strong> Sangineto a accueilli le tournage de <em>"La Voce di Cupido"</em>, comédie romantique de Ago Panini, cofinancée par la Calabria Film Commission, diffusée sur Rai en décembre 2025.',
+    arco_p:'Un majestueux <strong>arc naturel</strong> sculpté par la mer gardant un lagon secret en croissant — la Grotta del Saraceno. L\'un des plus beaux endroits de Calabre.',
+    arco_loc:'San Nicola Arcella (CS) — Voir sur Maps',
+    arco_exp:'L\'arc naturel, haut de dizaines de mètres, encadre une petite plage de galets blancs et une eau turquoise intense. Accessible à pied via un sentier depuis la plage de San Nicola Arcella, ou en bateau. Au coucher du soleil le spectacle est extraordinaire.',
+    camm_h3:'Chemin de Saint François de Paule', camm_loc:'Chaîne Côtière, Calabre — Voir sur Maps',
+    camm_p:'Un parcours de <strong>112 km en 6 étapes</strong> à travers la Chaîne Côtière calabraise, entre villages, forêts de hêtres et panoramas sur la mer. Sur les traces du patron de la Calabre.',
+    camm_exp:'De San Marco Argentano jusqu\'au Sanctuaire de Paternò Calabro, avec arrêts intermédiaires à Paola. Pour des expériences plus courtes : la Via del Giovane et la Via dell\'Eremita. Période idéale : printemps et automne.',
+    rom_h3:'Grotte du Romito', rom_loc:'Papasidero (CS) — Voir sur Maps',
+    rom_p:'L\'un des plus anciens témoignages d\'art préhistorique en Europe : gravure d\'un bovidé <strong>sculptée il y a plus de 12 000 ans</strong>. Visitable avec passerelles et visites guidées.',
+    rom_exp:'Le bovidé gravé dans la roche remonte à environ 12 000 ans et est l\'un des plus grands exemples d\'art rupestre italien. Le site comprend aussi des sépultures et vestiges d\'Homo sapiens du Paléolithique.',
+    laos_h3:'Parc Archéologique de Laos', laos_loc:'Santa Maria del Cedro (CS) — Voir sur Maps',
+    laos_p:'Fondée après Sybaris, Laos conserve des restes de <strong>murs défensifs, habitations et zones artisanales</strong> — rare exemple d\'urbanisme grec face à la mer, abandonné au IIIe s. av. J.-C.',
+    laos_exp:'Fondée au VIe s. av. J.-C. par des colons grecs de Sybaris. Le site abrite la "Maison avec la Rampe" et la "Maison avec la Mosaïque". Le cadre paysager, entre vignobles et mer, le rend extraordinaire.',
+    bret_h3:'Musée des Brettii et de la Mer', bret_loc:'Cetraro (CS) — Voir sur Maps',
+    bret_p:'Raconte l\'histoire du territoire entre les IVe et IIIe s. av. J.-C. À ne pas manquer : la section maritime avec <strong>amphores trouvées le long de la côte</strong> et la collection cartographique Losardo.',
+    bret_exp:'Aménagé avec une approche didactique, il raconte le peuple des Brettii et le territoire côtier. Il abrite amphores, ancres et vestiges de toute la Riviera, ainsi que la précieuse collection cartographique du Prof. Raffaello Losardo.',
+    cast_h3:'Castello del Principe', cast_loc:'Sangineto (CS) — Voir sur Maps',
+    cast_p:'Le <strong>Château de Sangineto</strong> du XVe siècle — quatre tours cylindriques, murs crénelés, construit par les Sanseverino di Bisignano. Lieu de cœur du FAI, encore vivant et actif aujourd\'hui.',
+    cast_exp1:'Face à l\'embouchure du fleuve, le Château de Sangineto est une forteresse du XVe s. bâtie par les Sanseverino. Avec quatre tours cylindriques en pierre locale et une grande cour intérieure, il a accueilli les familles Majorana et Firrao et a servi de prison pendant la Première Guerre Mondiale.',
+    cast_exp2:'Tout au long de l\'année le Château organise des <strong>journées culturelles, marchés de Noël</strong> et autres activités communautaires. En été, lors de soirées spéciales, il se transforme en discothèque entre des murs médiévaux.',
+    sanf_h3:'Sanctuaire de Saint François de Paule', sanf_loc:'Paola (CS) — Voir sur Maps',
+    sanf_p:'L\'un des lieux de pèlerinage les plus importants du Sud de l\'Italie, dédié au <strong>patron de la Calabre</strong>. De la basilique moderne à la "Fonte della Cucchiarella" jusqu\'à l\'ermitage.',
+    sanf_exp:'Le complexe comprend la basilique moderne, la basilique ancienne avec les reliques du saint, l\'ermitage où San Francesco vécut en solitude et la suggestive Fonte della Cucchiarella. Des centaines de milliers de pèlerins chaque année.',
+    conv_h3:'Couvent des Capucins', conv_loc:'Belvedere Marittimo (CS) — Voir sur Maps',
+    conv_p:'Belvedere Marittimo est le <strong>"village des amoureux"</strong> : le couvent de 1595 abrite les reliques de Saint Valentin. Le 14 février des couples de toute l\'Italie se retrouvent ici.',
+    conv_exp:'Le couvent conserve des autels baroques, des fresques mariales et des œuvres d\'art sacré. Les reliques de Saint Valentin en font une destination de pèlerinage romantique unique en Italie. Belvedere Marittimo, avec son centre historique médiéval et sa vue sur la mer, est l\'un des villages les plus charmants de la Riviera.',
+    stations_title:'Gares de la Riviera', transfer_title:'Service Transfer', airports_title:'Aéroports proches', useful_links:'Liens utiles',
+    transfer_text:'Pour les transferts depuis les gares et aéroports, contacter la <strong>Réception de l\'Hôtel</strong>. Nous organisons des excursions personnalisées et recommandons les meilleurs itinéraires.',
+    cs_banner:'Découvrez la Calabre avec <a href="https://calabriastraordinaria.it" target="_blank">Calabria Straordinaria</a> — le portail officiel du tourisme calabrais'
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[lang] && translations[lang][key] !== undefined) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+  document.documentElement.lang = lang;
+  // Aggiorna anche i bottoni expand già aperti
+  document.querySelectorAll('.expand-btn').forEach(btn => {
+    if (btn.textContent !== 'Chiudi' && btn.textContent !== 'Close' && btn.textContent !== 'Schließen' && btn.textContent !== 'Fermer') {
+      const labels = {it:'Scopri di più', en:'Find out more', de:'Mehr erfahren', fr:'En savoir plus'};
+      btn.textContent = labels[lang];
+    }
+  });
 }
 </script>
 </body>
